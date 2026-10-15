@@ -1,0 +1,6 @@
+services:
+  - type: static
+    name: pagewise
+    branch: main
+    buildCommand: ""
+    staticPublishPath: .
