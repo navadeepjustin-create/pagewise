@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Checkout — PAGEWISE | Premium Online Bookstore</title>
+  <meta name="description" content="Secure checkout for your selected books with flexible delivery and simulated payment options.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='18' width='100' height='100' fill='%231A2332'/><text x='50' y='68' text-anchor='middle' font-size='52' font-family='serif' font-weight='bold' fill='%23D4A843'>P</text></svg>">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- VOOK -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ═══ Simple Checkout Navbar ═══ -->
+  <header class="py-3 border-bottom bg-white">
+    <div class="container d-flex justify-content-between align-items-center">
+      <a class="navbar-brand vook-logo mb-0" href="index.html">
+        <span class="logo-icon"><i class="bi bi-book-half"></i></span> PAGEWISE
+      </a>
+      <div class="d-flex align-items-center gap-3">
+        <span class="text-muted small d-none d-sm-inline"><i class="bi bi-shield-lock-fill text-success me-1"></i> 256-bit Encrypted Checkout</span>
+        <a href="cart.html" class="btn btn-ghost btn-sm"><i class="bi bi-arrow-left me-1"></i> Back to Cart</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ═══ Step Progress Indicator ═══ -->
+  <section class="py-3 bg-light border-bottom">
+    <div class="container">
+      <div class="checkout-steps d-flex justify-content-center align-items-center gap-2 gap-md-4">
+        <div class="step-item d-flex align-items-center gap-2">
+          <span class="step-badge active" id="step-badge-1">1</span>
+          <span class="step-label d-none d-md-inline small fw-semibold">Contact</span>
+        </div>
+        <div class="step-line" style="width: 30px; height: 2px; background: var(--vook-border);"></div>
+
+        <div class="step-item d-flex align-items-center gap-2">
+          <span class="step-badge" id="step-badge-2">2</span>
+          <span class="step-label d-none d-md-inline small fw-semibold">Shipping</span>
+        </div>
+        <div class="step-line" style="width: 30px; height: 2px; background: var(--vook-border);"></div>
+
+        <div class="step-item d-flex align-items-center gap-2">
+          <span class="step-badge" id="step-badge-3">3</span>
+          <span class="step-label d-none d-md-inline small fw-semibold">Delivery</span>
+        </div>
+        <div class="step-line" style="width: 30px; height: 2px; background: var(--vook-border);"></div>
+
+        <div class="step-item d-flex align-items-center gap-2">
+          <span class="step-badge" id="step-badge-4">4</span>
+          <span class="step-label d-none d-md-inline small fw-semibold">Payment</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Main Checkout Content ═══ -->
+  <main class="section-padding py-5">
+    <div class="container">
+      <div class="row g-5" id="checkout-main-row">
+        
+        <!-- Form Steps Area (Left) -->
+        <div class="col-lg-7">
+          
+          <!-- STEP 1: Contact Information -->
+          <div class="checkout-step-pane" id="step-pane-1">
+            <h4 class="fw-heading mb-3">1. Contact Information</h4>
+            <p class="text-muted small mb-4">We'll send order updates and invoice receipts here.</p>
+
+            <form onsubmit="return false;">
+              <div class="mb-3">
+                <label for="checkout-email" class="form-label">Email Address <span class="text-danger">*</span></label>
+                <input type="email" class="form-control" id="checkout-email" placeholder="you@example.com" required>
+              </div>
+
+              <div class="row g-3 mb-3">
+                <div class="col-md-6">
+                  <label for="checkout-name" class="form-label">Full Name <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="checkout-name" placeholder="John Doe" required>
+                </div>
+                <div class="col-md-6">
+                  <label for="checkout-phone" class="form-label">Phone Number <span class="text-danger">*</span></label>
+                  <input type="tel" class="form-control" id="checkout-phone" placeholder="9876543210" required>
+                </div>
+              </div>
+
+              <div class="d-flex justify-content-end mt-4">
+                <button type="button" class="btn btn-vook px-4" id="btn-step-1">
+                  Continue to Shipping <i class="bi bi-arrow-right ms-1"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- STEP 2: Delivery Address -->
+          <div class="checkout-step-pane" id="step-pane-2" style="display: none;">
+            <h4 class="fw-heading mb-3">2. Delivery Address</h4>
+            
+            <!-- Saved Addresses Container -->
+            <div id="saved-addresses-list" class="mb-4"></div>
+
+            <form onsubmit="return false;">
+              <div class="mb-3">
+                <label for="checkout-street" class="form-label">Street Address / House No. / Flat <span class="text-danger">*</span></label>
+                <input type="text" class="form-control" id="checkout-street" placeholder="e.g. 42 Heritage Manor, Baker Street" required>
+              </div>
+
+              <div class="row g-3 mb-3">
+                <div class="col-md-5">
+                  <label for="checkout-city" class="form-label">City <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="checkout-city" placeholder="e.g. Bengaluru" required>
+                </div>
+                <div class="col-md-4">
+                  <label for="checkout-state" class="form-label">State <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="checkout-state" placeholder="e.g. Karnataka" required>
+                </div>
+                <div class="col-md-3">
+                  <label for="checkout-pincode" class="form-label">PIN Code <span class="text-danger">*</span></label>
+                  <input type="text" class="form-control" id="checkout-pincode" placeholder="560001" maxlength="6" required>
+                </div>
+              </div>
+
+              <div class="form-check mb-4">
+                <input class="form-check-input" type="checkbox" id="save-address-check" checked>
+                <label class="form-check-label small" for="save-address-check">
+                  Save this address to my profile for future orders
+                </label>
+              </div>
+
+              <div class="d-flex justify-content-between mt-4">
+                <button type="button" class="btn btn-outline-secondary" id="btn-back-1">
+                  <i class="bi bi-arrow-left me-1"></i> Back
+                </button>
+                <button type="button" class="btn btn-vook px-4" id="btn-step-2">
+                  Continue to Delivery Method <i class="bi bi-arrow-right ms-1"></i>
+                </button>
+              </div>
+            </form>
+          </div>
+
+          <!-- STEP 3: Shipping Method -->
+          <div class="checkout-step-pane" id="step-pane-3" style="display: none;">
+            <h4 class="fw-heading mb-3">3. Delivery Options</h4>
+            <p class="text-muted small mb-4">Choose your preferred delivery speed.</p>
+
+            <div class="d-flex flex-column gap-3 mb-4">
+              <label class="card p-3 border cursor-pointer">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="d-flex align-items-center gap-3">
+                    <input type="radio" class="form-check-input" name="shipping-option" value="standard" checked>
+                    <div>
+                      <div class="fw-semibold">Standard Shipping</div>
+                      <small class="text-muted">Estimated delivery in 4-6 business days</small>
+                    </div>
+                  </div>
+                  <span class="fw-semibold text-success">FREE on orders ≥ ₹499 (else ₹50)</span>
+                </div>
+              </label>
+
+              <label class="card p-3 border cursor-pointer">
+                <div class="d-flex align-items-center justify-content-between">
+                  <div class="d-flex align-items-center gap-3">
+                    <input type="radio" class="form-check-input" name="shipping-option" value="express">
+                    <div>
+                      <div class="fw-semibold"><i class="bi bi-lightning-charge-fill text-warning me-1"></i> Priority Express Delivery</div>
+                      <small class="text-muted">Guaranteed delivery in 1-2 business days with premium packaging</small>
+                    </div>
+                  </div>
+                  <span class="fw-bold">₹99</span>
+                </div>
+              </label>
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+              <button type="button" class="btn btn-outline-secondary" id="btn-back-2">
+                <i class="bi bi-arrow-left me-1"></i> Back
+              </button>
+              <button type="button" class="btn btn-vook px-4" id="btn-step-3">
+                Continue to Payment <i class="bi bi-arrow-right ms-1"></i>
+              </button>
+            </div>
+          </div>
+
+          <!-- STEP 4: Payment Method (Simulated) -->
+          <div class="checkout-step-pane" id="step-pane-4" style="display: none;">
+            <h4 class="fw-heading mb-2">4. Payment Method</h4>
+            <div class="alert alert-info py-2 px-3 small mb-4">
+              <i class="bi bi-info-circle me-1"></i> <strong>Prototype Mode:</strong> All payments are simulated. No real money will be charged.
+            </div>
+
+            <div class="d-flex flex-column gap-3 mb-4">
+              
+              <!-- UPI Option -->
+              <div class="card p-3 border">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="payment-method" id="pay-upi" value="upi" checked>
+                  <label class="form-check-label fw-semibold" for="pay-upi">
+                    <i class="bi bi-qr-code text-primary me-2"></i> UPI / QR Code (Google Pay, PhonePe, Paytm)
+                  </label>
+                </div>
+                <div class="payment-subform mt-3 ps-4" id="payment-subform-upi">
+                  <label class="form-label small">UPI ID / VPA</label>
+                  <div class="input-group input-group-sm mb-2" style="max-width: 320px;">
+                    <input type="text" class="form-control" value="demo@okhdfcbank" readonly>
+                    <span class="input-group-text bg-success-subtle text-success small">Verified</span>
+                  </div>
+                  <small class="text-muted d-block">A payment request will be simulated upon placing order.</small>
+                </div>
+              </div>
+
+              <!-- Card Option -->
+              <div class="card p-3 border">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="payment-method" id="pay-card" value="card">
+                  <label class="form-check-label fw-semibold" for="pay-card">
+                    <i class="bi bi-credit-card-2-front text-accent me-2"></i> Credit / Debit Card
+                  </label>
+                </div>
+                <div class="payment-subform mt-3 ps-4" id="payment-subform-card" style="display: none;">
+                  <div class="row g-2 mb-2" style="max-width: 400px;">
+                    <div class="col-12">
+                      <input type="text" class="form-control form-control-sm" value="•••• •••• •••• 4242 (Simulated)" readonly>
+                    </div>
+                    <div class="col-6">
+                      <input type="text" class="form-control form-control-sm" value="12/28" readonly>
+                    </div>
+                    <div class="col-6">
+                      <input type="password" class="form-control form-control-sm" value="•••" readonly>
+                    </div>
+                  </div>
+                  <small class="text-muted d-block">Test card populated automatically.</small>
+                </div>
+              </div>
+
+              <!-- Net Banking -->
+              <div class="card p-3 border">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="payment-method" id="pay-netbanking" value="netbanking">
+                  <label class="form-check-label fw-semibold" for="pay-netbanking">
+                    <i class="bi bi-bank text-dark me-2"></i> Net Banking
+                  </label>
+                </div>
+                <div class="payment-subform mt-3 ps-4" id="payment-subform-netbanking" style="display: none;">
+                  <select class="form-select form-select-sm" style="max-width: 320px;">
+                    <option>HDFC Bank</option>
+                    <option>ICICI Bank</option>
+                    <option>State Bank of India</option>
+                    <option>Axis Bank</option>
+                  </select>
+                </div>
+              </div>
+
+              <!-- COD -->
+              <div class="card p-3 border">
+                <div class="form-check">
+                  <input class="form-check-input" type="radio" name="payment-method" id="pay-cod" value="cod">
+                  <label class="form-check-label fw-semibold" for="pay-cod">
+                    <i class="bi bi-cash-stack text-success me-2"></i> Cash on Delivery (COD)
+                  </label>
+                </div>
+                <div class="payment-subform mt-2 ps-4" id="payment-subform-cod" style="display: none;">
+                  <small class="text-muted">Pay by cash or UPI at the doorstep upon arrival.</small>
+                </div>
+              </div>
+
+            </div>
+
+            <div class="d-flex justify-content-between mt-4">
+              <button type="button" class="btn btn-outline-secondary" id="btn-back-3">
+                <i class="bi bi-arrow-left me-1"></i> Back
+              </button>
+              <button type="button" class="btn btn-vook btn-lg px-5" id="btn-place-order">
+                <i class="bi bi-bag-check me-2"></i> Place Order
+              </button>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Order Summary Sidebar (Right) -->
+        <div class="col-lg-5">
+          <div class="card border-0 shadow-sm p-4 sticky-top" style="top: 20px;">
+            <h5 class="fw-heading mb-3">Order Summary</h5>
+            
+            <!-- Items in Cart -->
+            <div id="checkout-summary-items" class="mb-3" style="max-height: 240px; overflow-y: auto;">
+              <!-- Filled by JS -->
+            </div>
+
+            <hr>
+
+            <div class="d-flex justify-content-between mb-2 small text-muted">
+              <span>Items Subtotal</span>
+              <span id="sum-subtotal">₹0</span>
+            </div>
+
+            <div class="d-flex justify-content-between mb-2 small text-success" id="sum-coupon-row" style="display: none;">
+              <span>Coupon Discount</span>
+              <span id="sum-coupon">- ₹0</span>
+            </div>
+
+            <div class="d-flex justify-content-between mb-2 small text-muted">
+              <span>Delivery Fee</span>
+              <span id="sum-shipping">₹0</span>
+            </div>
+
+            <hr>
+
+            <div class="d-flex justify-content-between align-items-baseline mb-3">
+              <span class="h6 fw-bold mb-0">Total to Pay</span>
+              <span class="h4 fw-bold text-accent mb-0" id="sum-total">₹0</span>
+            </div>
+
+            <div class="alert alert-light border small rounded-3 d-flex align-items-center gap-2 mb-0">
+              <i class="bi bi-shield-check text-success fs-5"></i>
+              <div>Safe & contact-free delivery with real-time order tracking</div>
+            </div>
+
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/checkout.js"></script>
+</body>
+</html>

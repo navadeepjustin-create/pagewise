@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Explore Books — PAGEWISE | Premium Online Bookstore</title>
+  <meta name="description" content="Browse our extensive collection of curated books across fiction, non-fiction, philosophy, science, history, and more. Filter by category, price, and rating.">
+  <meta property="og:title" content="Explore Books — PAGEWISE">
+  <meta property="og:description" content="Browse our catalog of over 45 hand-picked titles across 18 genres.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='18' width='100' height='100' fill='%231A2332'/><text x='50' y='68' text-anchor='middle' font-size='52' font-family='serif' font-weight='bold' fill='%23D4A843'>P</text></svg>">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Styles -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ═══ Announcement Bar ═══ -->
+  <div class="announcement-bar" id="announcement-bar">
+    <span>📚 <strong>Autumn Book Festival</strong> — Use code <a href="shop.html">WELCOME10</a> for 10% off your first order!</span>
+    <button class="announcement-close" aria-label="Dismiss announcement"><i class="bi bi-x-lg"></i></button>
+  </div>
+
+  <!-- ═══ Navbar ═══ -->
+  <nav class="navbar navbar-expand-lg vook-navbar" id="main-navbar">
+    <div class="container">
+      <a class="navbar-brand vook-logo" href="index.html">
+        <span class="logo-icon"><i class="bi bi-book-half"></i></span>
+        PAGEWISE
+      </a>
+
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="nav-icon-btn dark-mode-toggle" aria-label="Toggle dark mode"><i class="bi bi-moon-fill"></i></button>
+        <a href="wishlist.html" class="nav-icon-link" aria-label="Wishlist">
+          <i class="bi bi-heart"></i>
+          <span class="wishlist-badge" style="display:none">0</span>
+        </a>
+        <a href="cart.html" class="nav-icon-link" aria-label="Cart">
+          <i class="bi bi-bag"></i>
+          <span class="cart-badge" style="display:none">0</span>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link active" href="shop.html">Explore Books</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Categories</a>
+            <ul class="dropdown-menu" id="nav-categories-dropdown"></ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="shop.html?sort=bestseller">Bestsellers</a></li>
+          <li class="nav-item"><a class="nav-link" href="shop.html?sort=newest">New Arrivals</a></li>
+        </ul>
+
+        <div class="vook-search-wrap d-none d-lg-block me-3">
+          <i class="bi bi-search vook-search-icon"></i>
+          <input type="search" class="vook-search-input" placeholder="Search books, authors…" aria-label="Search books">
+        </div>
+
+        <div class="d-none d-lg-flex align-items-center gap-1">
+          <button class="nav-icon-btn dark-mode-toggle" aria-label="Toggle dark mode"><i class="bi bi-moon-fill"></i></button>
+          <a href="wishlist.html" class="nav-icon-link" aria-label="Wishlist">
+            <i class="bi bi-heart"></i>
+            <span class="wishlist-badge" style="display:none">0</span>
+          </a>
+          <a href="cart.html" class="nav-icon-link" aria-label="Cart">
+            <i class="bi bi-bag"></i>
+            <span class="cart-badge" style="display:none">0</span>
+          </a>
+          <a href="profile.html" class="nav-icon-link" aria-label="Account">
+            <i class="bi bi-person"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Search -->
+  <div class="d-lg-none px-3 py-2 bg-white border-bottom" style="position:sticky;top:var(--navbar-height);z-index:1035">
+    <div class="vook-search-wrap w-100">
+      <i class="bi bi-search vook-search-icon"></i>
+      <input type="search" class="vook-search-input" placeholder="Search books, authors…" aria-label="Search books">
+    </div>
+  </div>
+
+  <!-- ═══ Page Header & Breadcrumbs ═══ -->
+  <section class="page-header py-4 border-bottom" style="background:var(--vook-cream-light)">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb vook-breadcrumb mb-2">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Explore Books</li>
+        </ol>
+      </nav>
+      <div class="d-flex flex-wrap justify-content-between align-items-center gap-2">
+        <div>
+          <h1 class="h2 mb-1 fw-heading">The Collection</h1>
+          <p class="text-muted mb-0" id="result-count">Loading collection…</p>
+        </div>
+        <button class="btn btn-outline-vook d-lg-none" id="filter-toggle-mobile">
+          <i class="bi bi-sliders me-1"></i> Filter & Refine
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Main Shop Content ═══ -->
+  <section class="section-padding py-4">
+    <div class="container">
+      <div class="row g-4">
+        
+        <!-- Filter Sidebar -->
+        <aside class="col-lg-3 d-none d-lg-block" id="filter-sidebar">
+          <div class="filter-sidebar">
+            <div class="d-flex justify-content-between align-items-center mb-3">
+              <h5 class="fw-heading mb-0"><i class="bi bi-funnel me-1"></i> Filters</h5>
+              <button class="btn btn-ghost btn-sm p-0" onclick="clearAllFilters()">Reset All</button>
+            </div>
+
+            <!-- Search in Shop -->
+            <div class="filter-group mb-4">
+              <label class="filter-title" for="shop-search">Search Catalog</label>
+              <div class="input-group">
+                <input type="text" id="shop-search" class="form-control form-control-sm" placeholder="Title, author, keyword…">
+              </div>
+            </div>
+
+            <!-- Categories -->
+            <div class="filter-group mb-4">
+              <span class="filter-title">Category</span>
+              <div class="filter-options-scroll pe-1" id="filter-categories" style="max-height: 240px; overflow-y: auto;">
+                <!-- Generated by JS -->
+              </div>
+            </div>
+
+            <!-- Price Range -->
+            <div class="filter-group mb-4">
+              <div class="d-flex justify-content-between">
+                <span class="filter-title">Max Price</span>
+                <span class="fw-semibold text-accent" id="price-range-val" style="font-size:0.88rem">₹0 — ₹2000</span>
+              </div>
+              <input type="range" class="form-range mt-2" id="price-range" min="100" max="2000" step="50" value="2000">
+              <div class="d-flex justify-content-between text-muted" style="font-size:0.75rem">
+                <span>₹100</span>
+                <span>₹2,000</span>
+              </div>
+            </div>
+
+            <!-- Rating -->
+            <div class="filter-group mb-4">
+              <span class="filter-title">Customer Rating</span>
+              <div id="filter-ratings">
+                <label class="filter-option">
+                  <input type="checkbox" class="form-check-input" id="rating-4.5" value="4.5">
+                  <span>4.5 & up <span class="text-warning">★★★★★</span></span>
+                </label>
+                <label class="filter-option">
+                  <input type="checkbox" class="form-check-input" id="rating-4" value="4">
+                  <span>4.0 & up <span class="text-warning">★★★★☆</span></span>
+                </label>
+                <label class="filter-option">
+                  <input type="checkbox" class="form-check-input" id="rating-3.5" value="3.5">
+                  <span>3.5 & up <span class="text-warning">★★★☆☆</span></span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Format -->
+            <div class="filter-group mb-4">
+              <span class="filter-title">Format</span>
+              <div id="filter-formats">
+                <label class="filter-option">
+                  <input type="checkbox" class="form-check-input" id="format-hardcover" value="hardcover">
+                  <span>Hardcover</span>
+                </label>
+                <label class="filter-option">
+                  <input type="checkbox" class="form-check-input" id="format-paperback" value="paperback">
+                  <span>Paperback</span>
+                </label>
+                <label class="filter-option">
+                  <input type="checkbox" class="form-check-input" id="format-ebook" value="ebook">
+                  <span>eBook / Digital</span>
+                </label>
+              </div>
+            </div>
+
+            <!-- Availability -->
+            <div class="filter-group mb-4">
+              <span class="filter-title">Availability</span>
+              <div>
+                <label class="filter-option">
+                  <input type="radio" class="form-check-input" name="availability" id="avail-all" value="all" checked>
+                  <span>All Items</span>
+                </label>
+                <label class="filter-option">
+                  <input type="radio" class="form-check-input" name="availability" id="avail-instock" value="instock">
+                  <span>In Stock Only</span>
+                </label>
+                <label class="filter-option">
+                  <input type="radio" class="form-check-input" name="availability" id="avail-outofstock" value="outofstock">
+                  <span>Out of Stock</span>
+                </label>
+              </div>
+            </div>
+
+          </div>
+        </aside>
+
+        <!-- Books List & Controls -->
+        <main class="col-lg-9">
+          
+          <!-- Controls Bar -->
+          <div class="shop-controls d-flex flex-wrap justify-content-between align-items-center mb-3 p-3 bg-white rounded shadow-sm border">
+            <!-- Active Filter Tags -->
+            <div class="d-flex flex-wrap align-items-center gap-2 mb-2 mb-md-0" id="active-filters">
+              <!-- Rendered by JS -->
+            </div>
+
+            <div class="d-flex align-items-center gap-3 ms-auto">
+              <!-- Sort Dropdown -->
+              <div class="d-flex align-items-center gap-2">
+                <label for="shop-sort" class="text-nowrap small text-muted mb-0">Sort by:</label>
+                <select id="shop-sort" class="form-select form-select-sm" style="min-width: 150px;">
+                  <option value="relevance">Featured</option>
+                  <option value="popular">Most Popular</option>
+                  <option value="newest">Newest Releases</option>
+                  <option value="price-asc">Price: Low to High</option>
+                  <option value="price-desc">Price: High to Low</option>
+                  <option value="rating">Highest Rated</option>
+                </select>
+              </div>
+
+              <!-- View Toggle (Grid / List) -->
+              <div class="view-toggle btn-group btn-group-sm" role="group" aria-label="View toggle">
+                <button type="button" class="btn btn-outline-secondary active" data-view="grid" onclick="setShopView('grid')" title="Grid view">
+                  <i class="bi bi-grid-3x3-gap-fill"></i>
+                </button>
+                <button type="button" class="btn btn-outline-secondary" data-view="list" onclick="setShopView('list')" title="List view">
+                  <i class="bi bi-view-list"></i>
+                </button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Books Grid Container -->
+          <div id="shop-books-grid" class="row row-cols-2 row-cols-md-3 row-cols-xl-4 g-3 mb-4">
+            <!-- Rendered by shop.js -->
+          </div>
+
+          <!-- Pagination -->
+          <div id="shop-pagination" class="mt-4">
+            <!-- Rendered by shop.js -->
+          </div>
+
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Footer ═══ -->
+  <footer class="vook-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+          <a class="vook-logo mb-3 d-inline-flex" href="index.html" style="color:var(--vook-cream)!important">
+            <span class="logo-icon"><i class="bi bi-book-half"></i></span> PAGEWISE
+          </a>
+          <p style="font-size:0.88rem;margin-top:0.75rem">Find Your Next Chapter. A curated bookstore for thoughtful readers.</p>
+          <div class="footer-social mt-3">
+            <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6>Shop</h6>
+          <ul class="footer-links">
+            <li><a href="shop.html">All Books</a></li>
+            <li><a href="shop.html?sort=bestseller">Bestsellers</a></li>
+            <li><a href="shop.html?sort=newest">New Arrivals</a></li>
+            <li><a href="shop.html?filter=under299">Under ₹299</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6>Account</h6>
+          <ul class="footer-links">
+            <li><a href="profile.html">My Profile</a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6>Support</h6>
+          <ul class="footer-links">
+            <li><a href="#">Help Centre</a></li>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 col-6">
+          <h6>Legal</h6>
+          <ul class="footer-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom text-center">
+        <p class="mb-0">&copy; 2026 PAGEWISE. All rights reserved. This is a frontend prototype for demonstration purposes.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ Mobile Bottom Navigation ═══ -->
+  <nav class="mobile-bottom-nav" id="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item" aria-label="Home">
+      <i class="bi bi-house"></i> <span>Home</span>
+    </a>
+    <a href="shop.html" class="mobile-nav-item active" aria-label="Explore">
+      <i class="bi bi-compass"></i> <span>Explore</span>
+    </a>
+    <a href="wishlist.html" class="mobile-nav-item" aria-label="Wishlist">
+      <i class="bi bi-heart"></i> <span>Wishlist</span>
+      <span class="wishlist-badge" style="display:none;position:absolute;top:2px;right:calc(50% - 18px)">0</span>
+    </a>
+    <a href="cart.html" class="mobile-nav-item" aria-label="Cart">
+      <i class="bi bi-bag"></i> <span>Cart</span>
+      <span class="cart-badge" style="display:none;position:absolute;top:2px;right:calc(50% - 18px)">0</span>
+    </a>
+    <a href="profile.html" class="mobile-nav-item" aria-label="Profile">
+      <i class="bi bi-person"></i> <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- Auth Modal -->
+  <div class="modal fade" id="authModal" tabindex="-1" aria-label="Sign In or Register">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-heading">Welcome to PAGEWISE</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="nav auth-tabs mb-3 justify-content-center" role="tablist">
+            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#signin-tab">Sign In</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#register-tab">Register</button></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="signin-tab">
+              <form id="signin-form">
+                <div class="mb-3">
+                  <label class="form-label" for="signin-email">Email</label>
+                  <input type="email" class="form-control" id="signin-email" placeholder="you@example.com" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="signin-password">Password</label>
+                  <input type="password" class="form-control" id="signin-password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn btn-vook w-100">Sign In</button>
+                <p class="text-center mt-3 sample-data-label">This is a simulated sign-in for the local prototype. No real authentication occurs.</p>
+              </form>
+            </div>
+            <div class="tab-pane fade" id="register-tab">
+              <form id="register-form">
+                <div class="mb-3">
+                  <label class="form-label" for="reg-name">Full Name</label>
+                  <input type="text" class="form-control" id="reg-name" placeholder="Your name" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="reg-email">Email</label>
+                  <input type="email" class="form-control" id="reg-email" placeholder="you@example.com" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="reg-password">Password</label>
+                  <input type="password" class="form-control" id="reg-password" placeholder="Create password" required minlength="6">
+                </div>
+                <button type="submit" class="btn btn-vook w-100">Create Account</button>
+                <p class="text-center mt-3 sample-data-label">This is a simulated registration. Production use requires a trusted backend for authentication.</p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script src="js/shop.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Categories dropdown in navbar
+      const catDropdown = document.getElementById('nav-categories-dropdown');
+      if (catDropdown) {
+        CATEGORIES.forEach(cat => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a class="dropdown-item" href="shop.html?category=${cat.id}"><i class="bi ${cat.icon} me-2"></i>${cat.name}</a>`;
+          catDropdown.appendChild(li);
+        });
+      }
+    });
+  </script>
+</body>
+</html>

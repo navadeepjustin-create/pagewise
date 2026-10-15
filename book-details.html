@@ -1,0 +1,703 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Book Details — PAGEWISE | Premium Online Bookstore</title>
+  <meta name="description" content="View book details, synopsis, author biography, reader reviews, and order online with PAGEWISE.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='18' width='100' height='100' fill='%231A2332'/><text x='50' y='68' text-anchor='middle' font-size='52' font-family='serif' font-weight='bold' fill='%23D4A843'>P</text></svg>">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- VOOK -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ═══ Announcement Bar ═══ -->
+  <div class="announcement-bar" id="announcement-bar">
+    <span>📚 <strong>Autumn Book Festival</strong> — Use code <a href="shop.html">WELCOME10</a> for 10% off your first order!</span>
+    <button class="announcement-close" aria-label="Dismiss announcement"><i class="bi bi-x-lg"></i></button>
+  </div>
+
+  <!-- ═══ Navbar ═══ -->
+  <nav class="navbar navbar-expand-lg vook-navbar" id="main-navbar">
+    <div class="container">
+      <a class="navbar-brand vook-logo" href="index.html">
+        <span class="logo-icon"><i class="bi bi-book-half"></i></span>
+        PAGEWISE
+      </a>
+
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="nav-icon-btn dark-mode-toggle" aria-label="Toggle dark mode"><i class="bi bi-moon-fill"></i></button>
+        <a href="wishlist.html" class="nav-icon-link" aria-label="Wishlist">
+          <i class="bi bi-heart"></i>
+          <span class="wishlist-badge" style="display:none">0</span>
+        </a>
+        <a href="cart.html" class="nav-icon-link" aria-label="Cart">
+          <i class="bi bi-bag"></i>
+          <span class="cart-badge" style="display:none">0</span>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="shop.html">Explore Books</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Categories</a>
+            <ul class="dropdown-menu" id="nav-categories-dropdown"></ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="shop.html?sort=bestseller">Bestsellers</a></li>
+          <li class="nav-item"><a class="nav-link" href="shop.html?sort=newest">New Arrivals</a></li>
+        </ul>
+
+        <div class="vook-search-wrap d-none d-lg-block me-3">
+          <i class="bi bi-search vook-search-icon"></i>
+          <input type="search" class="vook-search-input" placeholder="Search books, authors…" aria-label="Search books">
+        </div>
+
+        <div class="d-none d-lg-flex align-items-center gap-1">
+          <button class="nav-icon-btn dark-mode-toggle" aria-label="Toggle dark mode"><i class="bi bi-moon-fill"></i></button>
+          <a href="wishlist.html" class="nav-icon-link" aria-label="Wishlist">
+            <i class="bi bi-heart"></i>
+            <span class="wishlist-badge" style="display:none">0</span>
+          </a>
+          <a href="cart.html" class="nav-icon-link" aria-label="Cart">
+            <i class="bi bi-bag"></i>
+            <span class="cart-badge" style="display:none">0</span>
+          </a>
+          <a href="profile.html" class="nav-icon-link" aria-label="Account">
+            <i class="bi bi-person"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Search -->
+  <div class="d-lg-none px-3 py-2 bg-white border-bottom" style="position:sticky;top:var(--navbar-height);z-index:1035">
+    <div class="vook-search-wrap w-100">
+      <i class="bi bi-search vook-search-icon"></i>
+      <input type="search" class="vook-search-input" placeholder="Search books, authors…" aria-label="Search books">
+    </div>
+  </div>
+
+  <!-- Breadcrumbs -->
+  <section class="py-3 border-bottom" style="background:var(--vook-cream-light)">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb vook-breadcrumb mb-0" id="book-breadcrumbs">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="shop.html">Explore Books</a></li>
+          <li class="breadcrumb-item active" id="breadcrumb-title" aria-current="page">Loading…</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ═══ Book Details Section ═══ -->
+  <main class="section-padding py-5">
+    <div class="container" id="book-detail-container">
+      <!-- Loading Skeleton or Not Found -->
+      <div class="text-center py-5" id="book-loading-state">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Loading book details...</span>
+        </div>
+        <p class="mt-3 text-muted">Retrieving book information…</p>
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══ Recommended / Similar Books ═══ -->
+  <section class="section-padding section-bg-alt border-top" id="similar-section" style="display:none">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-end mb-3">
+        <div>
+          <h2 class="section-title mb-1">Readers Also Enjoyed</h2>
+          <div class="section-divider"></div>
+          <p class="section-subtitle mb-0">Hand-picked recommendations based on this genre.</p>
+        </div>
+        <a href="shop.html" class="btn btn-ghost">View All <i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div class="row row-cols-2 row-cols-md-4 g-3" id="similar-books-grid">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Recently Viewed Books ═══ -->
+  <section class="section-padding border-top" id="recently-viewed-section" style="display:none">
+    <div class="container">
+      <h3 class="fw-heading h4 mb-3">Recently Viewed</h3>
+      <div class="book-scroll-row" id="recently-viewed-row">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Write Review Modal (Simulated) ═══ -->
+  <div class="modal fade" id="reviewModal" tabindex="-1" aria-label="Write a Review">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title fw-heading">Write a Review</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <form id="write-review-form">
+            <div class="mb-3">
+              <label class="form-label">Your Rating</label>
+              <div class="rating-select d-flex gap-2 fs-4 text-warning cursor-pointer" id="star-rating-input">
+                <i class="bi bi-star" data-val="1"></i>
+                <i class="bi bi-star" data-val="2"></i>
+                <i class="bi bi-star" data-val="3"></i>
+                <i class="bi bi-star" data-val="4"></i>
+                <i class="bi bi-star" data-val="5"></i>
+              </div>
+              <input type="hidden" id="review-stars-val" value="5">
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="review-title">Review Headline</label>
+              <input type="text" class="form-control" id="review-title" placeholder="e.g. Masterpiece of storytelling" required>
+            </div>
+            <div class="mb-3">
+              <label class="form-label" for="review-body">Your Review</label>
+              <textarea class="form-control" id="review-body" rows="4" placeholder="What did you like or dislike about this book?" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-vook w-100">Submit Review</button>
+            <p class="text-center mt-2 sample-data-label">Simulated review submission for the local prototype.</p>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Footer ═══ -->
+  <footer class="vook-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+          <a class="vook-logo mb-3 d-inline-flex" href="index.html" style="color:var(--vook-cream)!important">
+            <span class="logo-icon"><i class="bi bi-book-half"></i></span> PAGEWISE
+          </a>
+          <p style="font-size:0.88rem;margin-top:0.75rem">Find Your Next Chapter. A curated bookstore for thoughtful readers.</p>
+          <div class="footer-social mt-3">
+            <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6>Shop</h6>
+          <ul class="footer-links">
+            <li><a href="shop.html">All Books</a></li>
+            <li><a href="shop.html?sort=bestseller">Bestsellers</a></li>
+            <li><a href="shop.html?sort=newest">New Arrivals</a></li>
+            <li><a href="shop.html?filter=under299">Under ₹299</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6>Account</h6>
+          <ul class="footer-links">
+            <li><a href="profile.html">My Profile</a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6>Support</h6>
+          <ul class="footer-links">
+            <li><a href="#">Help Centre</a></li>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 col-6">
+          <h6>Legal</h6>
+          <ul class="footer-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom text-center">
+        <p class="mb-0">&copy; 2026 PAGEWISE. All rights reserved. This is a frontend prototype for demonstration purposes.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ Mobile Bottom Navigation ═══ -->
+  <nav class="mobile-bottom-nav" id="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item" aria-label="Home">
+      <i class="bi bi-house"></i> <span>Home</span>
+    </a>
+    <a href="shop.html" class="mobile-nav-item" aria-label="Explore">
+      <i class="bi bi-compass"></i> <span>Explore</span>
+    </a>
+    <a href="wishlist.html" class="mobile-nav-item" aria-label="Wishlist">
+      <i class="bi bi-heart"></i> <span>Wishlist</span>
+      <span class="wishlist-badge" style="display:none;position:absolute;top:2px;right:calc(50% - 18px)">0</span>
+    </a>
+    <a href="cart.html" class="mobile-nav-item" aria-label="Cart">
+      <i class="bi bi-bag"></i> <span>Cart</span>
+      <span class="cart-badge" style="display:none;position:absolute;top:2px;right:calc(50% - 18px)">0</span>
+    </a>
+    <a href="profile.html" class="mobile-nav-item" aria-label="Profile">
+      <i class="bi bi-person"></i> <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- Auth Modal -->
+  <div class="modal fade" id="authModal" tabindex="-1" aria-label="Sign In or Register">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-heading">Welcome to PAGEWISE</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="nav auth-tabs mb-3 justify-content-center" role="tablist">
+            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#signin-tab">Sign In</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#register-tab">Register</button></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="signin-tab">
+              <form id="signin-form">
+                <div class="mb-3">
+                  <label class="form-label" for="signin-email">Email</label>
+                  <input type="email" class="form-control" id="signin-email" placeholder="you@example.com" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="signin-password">Password</label>
+                  <input type="password" class="form-control" id="signin-password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn btn-vook w-100">Sign In</button>
+                <p class="text-center mt-3 sample-data-label">This is a simulated sign-in for the local prototype. No real authentication occurs.</p>
+              </form>
+            </div>
+            <div class="tab-pane fade" id="register-tab">
+              <form id="register-form">
+                <div class="mb-3">
+                  <label class="form-label" for="reg-name">Full Name</label>
+                  <input type="text" class="form-control" id="reg-name" placeholder="Your name" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="reg-email">Email</label>
+                  <input type="email" class="form-control" id="reg-email" placeholder="you@example.com" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="reg-password">Password</label>
+                  <input type="password" class="form-control" id="reg-password" placeholder="Create password" required minlength="6">
+                </div>
+                <button type="submit" class="btn btn-vook w-100">Create Account</button>
+                <p class="text-center mt-3 sample-data-label">This is a simulated registration. Production use requires a trusted backend for authentication.</p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Navbar categories
+      const catDropdown = document.getElementById('nav-categories-dropdown');
+      if (catDropdown) {
+        CATEGORIES.forEach(cat => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a class="dropdown-item" href="shop.html?category=${cat.id}"><i class="bi ${cat.icon} me-2"></i>${cat.name}</a>`;
+          catDropdown.appendChild(li);
+        });
+      }
+
+      // Read ID from URL
+      const params = new URLSearchParams(window.location.search);
+      const bookId = params.get('id');
+      const container = document.getElementById('book-detail-container');
+
+      if (!bookId) {
+        renderNotFound('No book specified.');
+        return;
+      }
+
+      const book = getBookById(bookId);
+      if (!book) {
+        renderNotFound('The book you are looking for could not be found.');
+        return;
+      }
+
+      // Add to recently viewed
+      addRecentlyViewed(book.id);
+
+      // Page Title & Meta
+      document.title = `${book.title} by ${book.author} — PAGEWISE`;
+      const descMeta = document.querySelector('meta[name="description"]');
+      if (descMeta) descMeta.content = book.description.substring(0, 150) + '...';
+
+      // Update Breadcrumbs
+      const bcTitle = document.getElementById('breadcrumb-title');
+      if (bcTitle) bcTitle.textContent = book.title;
+      const bcList = document.getElementById('book-breadcrumbs');
+      if (bcList) {
+        const catObj = CATEGORIES.find(c => c.id === book.category);
+        const catName = catObj ? catObj.name : book.category;
+        const catLi = document.createElement('li');
+        catLi.className = 'breadcrumb-item';
+        catLi.innerHTML = `<a href="shop.html?category=${book.category}">${catName}</a>`;
+        bcList.insertBefore(catLi, bcTitle);
+      }
+
+      // Check stock
+      const stock = getStock(book.id);
+      const isOutOfStock = stock <= 0;
+      const discount = Math.round(((book.originalPrice - book.sellingPrice) / book.originalPrice) * 100);
+      const isWish = isWishlisted(book.id);
+
+      // Render Book Detail
+      container.innerHTML = `
+        <div class="row g-5">
+          <!-- Left Column: Cover & Badges -->
+          <div class="col-lg-5">
+            <div class="position-sticky" style="top: 100px;">
+              <div class="book-detail-cover-wrap p-4 bg-white rounded-3 shadow-sm border text-center position-relative">
+                <img src="${book.cover}" alt="${book.title}" class="img-fluid rounded shadow book-detail-cover" 
+                     onerror="this.src='https://placehold.co/400x600/1a2332/f5f0e8?text=${encodeURIComponent(book.title)}'"
+                     style="max-height: 480px; width: auto; object-fit: cover;">
+                
+                <button class="wishlist-btn position-absolute top-0 end-0 m-3 ${isWish ? 'active' : ''}" 
+                        onclick="handleWishlistToggle('${book.id}', this)" 
+                        title="${isWish ? 'Remove from Wishlist' : 'Add to Wishlist'}"
+                        style="width: 44px; height: 44px; font-size: 1.25rem;">
+                  <i class="bi ${isWish ? 'bi-heart-fill' : 'bi-heart'}"></i>
+                </button>
+
+                ${book.isBestseller ? '<span class="badge bg-danger position-absolute top-0 start-0 m-3 px-3 py-2"><i class="bi bi-award me-1"></i> Bestseller</span>' : ''}
+              </div>
+
+              <!-- Fast Shipping Perks Card -->
+              <div class="card mt-4 border-0 bg-light p-3">
+                <div class="d-flex align-items-center gap-3 mb-2">
+                  <i class="bi bi-truck text-accent fs-4"></i>
+                  <div>
+                    <div class="fw-semibold small">Free Express Delivery</div>
+                    <div class="text-muted" style="font-size:0.8rem">On eligible orders over ₹499</div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center gap-3 mb-2">
+                  <i class="bi bi-shield-check text-accent fs-4"></i>
+                  <div>
+                    <div class="fw-semibold small">100% Genuine Guaranteed</div>
+                    <div class="text-muted" style="font-size:0.8rem">Original publisher direct editions</div>
+                  </div>
+                </div>
+                <div class="d-flex align-items-center gap-3">
+                  <i class="bi bi-arrow-repeat text-accent fs-4"></i>
+                  <div>
+                    <div class="fw-semibold small">7-Day Easy Returns</div>
+                    <div class="text-muted" style="font-size:0.8rem">No questions asked return policy</div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Info & Actions -->
+          <div class="col-lg-7">
+            <span class="badge text-bg-secondary text-uppercase mb-2" style="letter-spacing:1px; font-size:0.75rem">${book.category}</span>
+            <h1 class="display-6 fw-heading mb-2">${book.title}</h1>
+            <p class="fs-5 text-muted mb-3">By <a href="shop.html?search=${encodeURIComponent(book.author)}" class="text-decoration-none fw-semibold text-dark">${book.author}</a></p>
+
+            <!-- Rating & Reviews -->
+            <div class="d-flex align-items-center gap-2 mb-4">
+              <span class="text-warning fs-5">${renderStars(book.rating)}</span>
+              <span class="fw-bold">${book.rating.toFixed(1)}</span>
+              <span class="text-muted">(${book.reviewCount.toLocaleString('en-IN')} ratings)</span>
+              <span class="mx-2 text-muted">•</span>
+              <a href="#reviews-section" class="text-decoration-none small text-accent">Read customer reviews</a>
+            </div>
+
+            <!-- Price Card -->
+            <div class="p-3 rounded-3 bg-light border mb-4">
+              <div class="d-flex align-items-baseline gap-3">
+                <span class="h2 fw-bold text-accent mb-0">₹${book.sellingPrice}</span>
+                ${discount > 0 ? `
+                  <span class="text-decoration-line-through text-muted fs-5">₹${book.originalPrice}</span>
+                  <span class="badge bg-success-subtle text-success border border-success-subtle px-2 py-1">${discount}% OFF</span>
+                ` : ''}
+              </div>
+              <div class="mt-2 text-muted small d-flex align-items-center gap-2">
+                <i class="bi bi-shield-check text-success"></i>
+                <span>Inclusive of all taxes • 100% Genuine publisher original</span>
+              </div>
+            </div>
+
+            <!-- Format Selector -->
+            <div class="mb-4">
+              <label class="form-label fw-semibold mb-2">Available Formats</label>
+              <div class="d-flex flex-wrap gap-2" id="format-options">
+                ${(book.formats || ['Paperback']).map((fmt, idx) => `
+                  <button type="button" class="btn btn-outline-dark btn-sm rounded-pill px-3 py-2 format-btn ${idx === 0 ? 'active' : ''}" 
+                          onclick="selectFormat(this, '${fmt}')">
+                    <i class="bi ${fmt === 'hardcover' ? 'bi-book-half' : fmt === 'ebook' ? 'bi-tablet' : 'bi-book'} me-1"></i>
+                    ${fmt.charAt(0).toUpperCase() + fmt.slice(1)}
+                  </button>
+                `).join('')}
+              </div>
+            </div>
+
+            <!-- Stock Status -->
+            <div class="mb-4">
+              ${isOutOfStock ? `
+                <div class="alert alert-danger py-2 px-3 d-inline-block small mb-0">
+                  <i class="bi bi-x-circle me-1"></i> <strong>Out of Stock</strong> — Check back soon
+                </div>
+              ` : stock <= 5 ? `
+                <div class="alert alert-warning py-2 px-3 d-inline-block small mb-0">
+                  <i class="bi bi-exclamation-triangle me-1"></i> Only <strong>${stock} copies</strong> left in stock!
+                </div>
+              ` : `
+                <div class="text-success small fw-semibold">
+                  <i class="bi bi-check-circle-fill me-1"></i> In Stock (${stock} available)
+                </div>
+              `}
+            </div>
+
+            <!-- Quantity & Purchase Actions -->
+            <div class="d-flex flex-wrap align-items-center gap-3 mb-5">
+              <div class="quantity-control" style="width: 130px;">
+                <button type="button" class="btn btn-sm btn-outline-secondary px-2" onclick="adjustQty(-1)" ${isOutOfStock ? 'disabled' : ''}>-</button>
+                <input type="number" id="book-qty" class="form-control form-control-sm text-center mx-1" value="1" min="1" max="${stock || 1}" ${isOutOfStock ? 'disabled' : ''} readonly>
+                <button type="button" class="btn btn-sm btn-outline-secondary px-2" onclick="adjustQty(1)" ${isOutOfStock ? 'disabled' : ''}>+</button>
+              </div>
+
+              <button class="btn btn-vook btn-lg px-4 flex-grow-1" onclick="handleAddToCart('${book.id}')" ${isOutOfStock ? 'disabled' : ''}>
+                <i class="bi bi-bag-plus me-2"></i> Add to Cart
+              </button>
+
+              <button class="btn btn-outline-vook btn-lg px-4" onclick="handleBuyNow('${book.id}')" ${isOutOfStock ? 'disabled' : ''}>
+                Buy Now
+              </button>
+            </div>
+
+            <!-- Book Synopsis -->
+            <div class="mb-4">
+              <h4 class="fw-heading mb-3">Overview</h4>
+              <p class="text-secondary leading-relaxed" style="line-height:1.75; font-size:1.05rem">
+                ${book.description}
+              </p>
+            </div>
+
+            <!-- Author Bio -->
+            <div class="p-4 bg-light rounded-3 mb-4 border">
+              <h5 class="fw-heading mb-2"><i class="bi bi-feather me-2 text-accent"></i>About ${book.author}</h5>
+              <p class="text-muted mb-0 small" style="line-height:1.6">
+                ${book.authorBio || `${book.author} is an acclaimed author celebrated internationally for insightful and transformative work in ${book.category}.`}
+              </p>
+            </div>
+
+            <!-- Specifications Table -->
+            <div class="mb-5">
+              <h5 class="fw-heading mb-3">Book Details</h5>
+              <div class="table-responsive">
+                <table class="table table-bordered table-sm small">
+                  <tbody>
+                    <tr><th class="bg-light" style="width:35%">ISBN-13</th><td>${book.isbn}</td></tr>
+                    <tr><th class="bg-light">Publisher</th><td>${book.publisher}</td></tr>
+                    <tr><th class="bg-light">Publication Date</th><td>${new Date(book.publishDate).toLocaleDateString('en-IN', { year:'numeric', month:'long', day:'numeric' })}</td></tr>
+                    <tr><th class="bg-light">Pages</th><td>${book.pageCount} pages</td></tr>
+                    <tr><th class="bg-light">Language</th><td>${book.language || 'English'}</td></tr>
+                    <tr><th class="bg-light">Dimensions</th><td>${book.dimensions || '5.5 x 8.5 inches'}</td></tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Reviews Section -->
+            <div id="reviews-section" class="pt-4 border-top">
+              <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                  <h4 class="fw-heading mb-1">Customer Reviews</h4>
+                  <div class="small text-muted">Overall rating ${book.rating.toFixed(1)} out of 5 (${book.reviewCount} total reviews)</div>
+                </div>
+                <button class="btn btn-outline-dark btn-sm" data-bs-toggle="modal" data-bs-target="#reviewModal">
+                  <i class="bi bi-pencil me-1"></i> Write a Review
+                </button>
+              </div>
+
+              <!-- Sample Reviews List -->
+              <div class="reviews-list d-flex flex-column gap-3" id="book-reviews-container">
+                <div class="card border-0 bg-light p-3">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="fw-semibold small">Aditi Sharma <span class="badge bg-secondary-subtle text-secondary ms-1">Verified Reader</span></span>
+                    <span class="text-warning small">★★★★★</span>
+                  </div>
+                  <h6 class="fw-bold mb-1 small">Could not put it down!</h6>
+                  <p class="text-muted small mb-0">An absolute masterpiece. Beautifully packaged by PAGEWISE, delivered promptly in pristine condition. Highly recommended to anyone who loves deep, reflective reads.</p>
+                </div>
+
+                <div class="card border-0 bg-light p-3">
+                  <div class="d-flex justify-content-between align-items-center mb-2">
+                    <span class="fw-semibold small">Vikram Malhotra <span class="badge bg-secondary-subtle text-secondary ms-1">Verified Reader</span></span>
+                    <span class="text-warning small">★★★★☆</span>
+                  </div>
+                  <h6 class="fw-bold mb-1 small">Thought-provoking and beautifully written</h6>
+                  <p class="text-muted small mb-0">The concepts discussed here stayed with me for weeks. Essential reading for every bookshelf.</p>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      `;
+
+      // Render Similar Books (Same category)
+      const allBooks = getBooks();
+      const similar = allBooks.filter(b => b.category === book.category && b.id !== book.id).slice(0, 4);
+      if (similar.length > 0) {
+        const simSection = document.getElementById('similar-section');
+        const simGrid = document.getElementById('similar-books-grid');
+        simGrid.innerHTML = similar.map(b => renderBookCard(b)).join('');
+        simSection.style.display = 'block';
+      }
+
+      // Render Recently Viewed Books
+      renderRecentlyViewedRow(book.id);
+    });
+
+    // Quantity adjuster
+    window.adjustQty = function(change) {
+      const input = document.getElementById('book-qty');
+      if (!input) return;
+      let val = parseInt(input.value, 10) || 1;
+      const max = parseInt(input.getAttribute('max'), 10) || 10;
+      val = Math.max(1, Math.min(max, val + change));
+      input.value = val;
+    };
+
+    // Format selection
+    window.selectFormat = function(btn, format) {
+      document.querySelectorAll('.format-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    };
+
+    // Add to cart with quantity
+    window.handleAddToCart = function(bookId) {
+      const qtyInput = document.getElementById('book-qty');
+      const qty = qtyInput ? parseInt(qtyInput.value, 10) || 1 : 1;
+      addToCart(bookId, qty);
+    };
+
+    // Buy now (add to cart and redirect to checkout)
+    window.handleBuyNow = function(bookId) {
+      const qtyInput = document.getElementById('book-qty');
+      const qty = qtyInput ? parseInt(qtyInput.value, 10) || 1 : 1;
+      addToCart(bookId, qty);
+      window.location.href = 'checkout.html';
+    };
+
+    // Wishlist toggle handler
+    window.handleWishlistToggle = function(bookId, btn) {
+      toggleWishlist(bookId);
+      const active = isWishlisted(bookId);
+      btn.classList.toggle('active', active);
+      const icon = btn.querySelector('i');
+      if (icon) {
+        icon.className = active ? 'bi bi-heart-fill' : 'bi bi-heart';
+      }
+    };
+
+    // Not found state
+    function renderNotFound(msg) {
+      const container = document.getElementById('book-detail-container');
+      container.innerHTML = `
+        <div class="empty-state text-center py-5">
+          <div class="empty-state-icon fs-1 text-muted mb-3"><i class="bi bi-book"></i></div>
+          <h3 class="fw-heading">Book Not Found</h3>
+          <p class="text-muted mb-4">${msg}</p>
+          <a href="shop.html" class="btn btn-vook"><i class="bi bi-arrow-left me-1"></i> Return to Catalog</a>
+        </div>
+      `;
+    }
+
+    // Recently viewed row
+    function renderRecentlyViewedRow(currentId) {
+      const recentIds = getRecentlyViewed().filter(id => id !== currentId);
+      if (recentIds.length === 0) return;
+      const recentBooks = recentIds.map(id => getBookById(id)).filter(Boolean).slice(0, 8);
+      if (recentBooks.length === 0) return;
+
+      const sec = document.getElementById('recently-viewed-section');
+      const row = document.getElementById('recently-viewed-row');
+      row.innerHTML = recentBooks.map(b => {
+        const card = renderBookCard(b);
+        const temp = document.createElement('div');
+        temp.innerHTML = card;
+        const inner = temp.querySelector('.col');
+        return `<div class="book-scroll-item">${inner ? inner.innerHTML : card}</div>`;
+      }).join('');
+      sec.style.display = 'block';
+    }
+
+    // Write review form handler
+    const revForm = document.getElementById('write-review-form');
+    if (revForm) {
+      // Star selection
+      const starInputs = document.querySelectorAll('#star-rating-input i');
+      starInputs.forEach(star => {
+        star.addEventListener('click', () => {
+          const val = parseInt(star.dataset.val, 10);
+          document.getElementById('review-stars-val').value = val;
+          starInputs.forEach(s => {
+            const sVal = parseInt(s.dataset.val, 10);
+            s.className = sVal <= val ? 'bi bi-star-fill' : 'bi bi-star';
+          });
+        });
+      });
+
+      revForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const headline = document.getElementById('review-title').value;
+        const body = document.getElementById('review-body').value;
+        const rating = parseInt(document.getElementById('review-stars-val').value, 10) || 5;
+        const user = ensureUser();
+
+        // Prepend review to reviews container
+        const revContainer = document.getElementById('book-reviews-container');
+        if (revContainer) {
+          const div = document.createElement('div');
+          div.className = 'card border-0 bg-light p-3';
+          div.innerHTML = `
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <span class="fw-semibold small">${user.name || 'Anonymous Reader'} <span class="badge bg-secondary-subtle text-secondary ms-1">Verified Reader</span></span>
+              <span class="text-warning small">${'★'.repeat(rating) + '☆'.repeat(5 - rating)}</span>
+            </div>
+            <h6 class="fw-bold mb-1 small">${headline}</h6>
+            <p class="text-muted small mb-0">${body}</p>
+          `;
+          revContainer.prepend(div);
+        }
+
+        bootstrap.Modal.getInstance(document.getElementById('reviewModal'))?.hide();
+        revForm.reset();
+        showToast('Review submitted! Thank you for sharing your feedback.', 'success');
+      });
+    }
+  </script>
+</body>
+</html>

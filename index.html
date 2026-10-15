@@ -1,0 +1,607 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PAGEWISE — Find Your Next Chapter | Premium Online Bookstore</title>
+  <meta name="description" content="Discover stories, ideas, and perspectives worth keeping. PAGEWISE is a premium online bookstore offering curated collections and prompt doorstep delivery.">
+  <meta property="og:title" content="PAGEWISE — Find Your Next Chapter">
+  <meta property="og:description" content="Premium online bookstore with curated collections and timeless perspectives.">
+  <meta property="og:type" content="website">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='18' width='100' height='100' fill='%231A2332'/><text x='50' y='68' text-anchor='middle' font-size='52' font-family='serif' font-weight='bold' fill='%23D4A843'>P</text></svg>">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- Styles -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ═══ Announcement Bar ═══ -->
+  <div class="announcement-bar" id="announcement-bar">
+    <span>📚 <strong>Autumn Book Festival</strong> — Use code <a href="shop.html">WELCOME10</a> for 10% off your first order!</span>
+    <button class="announcement-close" aria-label="Dismiss announcement"><i class="bi bi-x-lg"></i></button>
+  </div>
+
+  <!-- ═══ Navbar ═══ -->
+  <nav class="navbar navbar-expand-lg vook-navbar" id="main-navbar">
+    <div class="container">
+      <a class="navbar-brand vook-logo" href="index.html">
+        <span class="logo-icon"><i class="bi bi-book-half"></i></span>
+        PAGEWISE
+      </a>
+
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="nav-icon-btn dark-mode-toggle" aria-label="Toggle dark mode"><i class="bi bi-moon-fill"></i></button>
+        <a href="wishlist.html" class="nav-icon-link" aria-label="Wishlist">
+          <i class="bi bi-heart"></i>
+          <span class="wishlist-badge" style="display:none">0</span>
+        </a>
+        <a href="cart.html" class="nav-icon-link" aria-label="Cart">
+          <i class="bi bi-bag"></i>
+          <span class="cart-badge" style="display:none">0</span>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="shop.html">Explore Books</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Categories</a>
+            <ul class="dropdown-menu" id="nav-categories-dropdown"></ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="shop.html?sort=bestseller">Bestsellers</a></li>
+          <li class="nav-item"><a class="nav-link" href="shop.html?sort=newest">New Arrivals</a></li>
+        </ul>
+
+        <div class="vook-search-wrap d-none d-lg-block me-3">
+          <i class="bi bi-search vook-search-icon"></i>
+          <input type="search" class="vook-search-input" placeholder="Search books, authors…" aria-label="Search books">
+        </div>
+
+        <div class="d-none d-lg-flex align-items-center gap-1">
+          <button class="nav-icon-btn dark-mode-toggle" aria-label="Toggle dark mode"><i class="bi bi-moon-fill"></i></button>
+          <a href="wishlist.html" class="nav-icon-link" aria-label="Wishlist">
+            <i class="bi bi-heart"></i>
+            <span class="wishlist-badge" style="display:none">0</span>
+          </a>
+          <a href="cart.html" class="nav-icon-link" aria-label="Cart">
+            <i class="bi bi-bag"></i>
+            <span class="cart-badge" style="display:none">0</span>
+          </a>
+          <a href="profile.html" class="nav-icon-link" aria-label="Account">
+            <i class="bi bi-person"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Mobile Search -->
+  <div class="d-lg-none px-3 py-2 bg-white border-bottom" style="position:sticky;top:var(--navbar-height);z-index:1035">
+    <div class="vook-search-wrap w-100">
+      <i class="bi bi-search vook-search-icon"></i>
+      <input type="search" class="vook-search-input" placeholder="Search books, authors…" aria-label="Search books">
+    </div>
+  </div>
+
+  <!-- ═══ Hero Section ═══ -->
+  <section class="hero-section">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-lg-6 mb-4 mb-lg-0">
+          <p class="text-uppercase fw-semibold text-accent mb-2" style="font-size:0.8rem;letter-spacing:2px">Find Your Next Chapter</p>
+          <h1 class="hero-tagline">Every Great Journey Begins with a <span class="accent">Book.</span></h1>
+          <p class="hero-subtitle">Discover stories, ideas, and perspectives worth keeping. From timeless classics to modern masterpieces — your perfect read awaits.</p>
+          <div class="d-flex flex-wrap gap-2">
+            <a href="shop.html" class="btn btn-vook px-4"><i class="bi bi-compass me-1"></i> Explore the Collection</a>
+            <a href="shop.html?sort=bestseller" class="btn btn-outline-vook px-4"><i class="bi bi-bookmark-star me-1"></i> Discover Your Next Read</a>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="hero-books-stack" id="hero-books-stack">
+            <!-- Filled by JS -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Browse by Category ═══ -->
+  <section class="section-padding">
+    <div class="container">
+      <h2 class="section-title">Browse by Category</h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Find your next read in over 18 carefully curated genres.</p>
+      <div class="row row-cols-2 row-cols-sm-3 row-cols-md-4 row-cols-lg-6 g-3" id="categories-grid">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Trending Now ═══ -->
+  <section class="section-padding section-bg-alt">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-end mb-3">
+        <div>
+          <h2 class="section-title mb-1">Trending Now</h2>
+          <div class="section-divider"></div>
+        </div>
+        <a href="shop.html?sort=popular" class="btn btn-ghost">View All <i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div class="book-scroll-row" id="trending-row">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Curated Collections ═══ -->
+  <section class="section-padding" id="collections-section">
+    <div class="container" id="collections-container">
+      <!-- Filled by JS -->
+    </div>
+  </section>
+
+  <!-- ═══ Bestsellers ═══ -->
+  <section class="section-padding section-bg-alt">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-end mb-3">
+        <div>
+          <h2 class="section-title mb-1">Bestsellers</h2>
+          <div class="section-divider"></div>
+          <p class="section-subtitle mb-0">The books everyone is talking about.</p>
+        </div>
+        <a href="shop.html?filter=bestseller" class="btn btn-ghost">View All <i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div class="row row-cols-2 row-cols-md-3 row-cols-lg-5 g-3" id="bestsellers-grid">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Staff Picks ═══ -->
+  <section class="section-padding">
+    <div class="container">
+      <h2 class="section-title">Staff Picks</h2>
+      <div class="section-divider"></div>
+      <p class="section-subtitle">Hand-picked by the PAGEWISE editorial team.</p>
+      <div class="row g-4" id="staff-picks-grid">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ The PageWise Promise ═══ -->
+  <section class="section-padding section-bg-alt">
+    <div class="container">
+      <div class="row g-4 align-items-center">
+        <div class="col-lg-6">
+          <p class="text-uppercase fw-semibold text-accent mb-2" style="font-size:0.8rem;letter-spacing:2px">The PageWise Promise</p>
+          <h2 class="section-title mb-3">A Curated Bookstore for Thoughtful Readers</h2>
+          <p class="text-muted mb-4">Every title in our collection is hand-curated by passionate book lovers. From pristine packaging and prompt doorstep delivery to verified publisher-direct editions, reading begins here.</p>
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-shield-check text-accent fs-4"></i>
+                <div>
+                  <h6 class="mb-0 fw-semibold">100% Genuine</h6>
+                  <small class="text-muted">Direct from publishers</small>
+                </div>
+              </div>
+            </div>
+            <div class="col-sm-6">
+              <div class="d-flex align-items-center gap-2">
+                <i class="bi bi-truck text-accent fs-4"></i>
+                <div>
+                  <h6 class="mb-0 fw-semibold">Express Delivery</h6>
+                  <small class="text-muted">Free on orders ≥ ₹499</small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6 text-center">
+          <div class="p-4 rounded-4 bg-white shadow-sm border d-inline-block text-start" style="max-width: 440px;">
+            <div class="d-flex align-items-center gap-3 mb-3">
+              <div class="avatar-placeholder rounded-circle bg-dark text-warning p-3 fs-3"><i class="bi bi-book-half"></i></div>
+              <div>
+                <h5 class="fw-heading mb-0">PAGEWISE Reader's Circle</h5>
+                <small class="text-muted">Over 45 curated classics & modern works</small>
+              </div>
+            </div>
+            <p class="text-muted small mb-3">Join a thoughtful reading community exploring timeless perspectives and stories worth keeping.</p>
+            <a href="shop.html" class="btn btn-vook btn-sm px-4">Explore the Full Catalog <i class="bi bi-arrow-right ms-1"></i></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ New Arrivals ═══ -->
+  <section class="section-padding">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-end mb-3">
+        <div>
+          <h2 class="section-title mb-1">New Arrivals</h2>
+          <div class="section-divider"></div>
+        </div>
+        <a href="shop.html?sort=newest" class="btn btn-ghost">View All <i class="bi bi-arrow-right"></i></a>
+      </div>
+      <div class="book-scroll-row" id="new-arrivals-row">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Testimonials ═══ -->
+  <section class="section-padding section-bg-alt">
+    <div class="container">
+      <h2 class="section-title text-center">What Readers Say</h2>
+      <div class="section-divider mx-auto"></div>
+      <p class="section-subtitle text-center">Feedback from the PAGEWISE community. <span class="sample-data-label">(Sample testimonials)</span></p>
+      <div class="row g-4" id="testimonials-grid">
+        <!-- Filled by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══ Newsletter ═══ -->
+  <section class="newsletter-section">
+    <div class="container text-center">
+      <h3 class="mb-2">Stay in the Loop</h3>
+      <p style="opacity:0.7;max-width:480px;margin:0 auto 1.5rem">Get notified about new releases, curated reading lists, and exclusive PAGEWISE offers.</p>
+      <form class="d-flex justify-content-center" style="max-width:460px;margin:0 auto" id="newsletter-form">
+        <input type="email" class="newsletter-input" placeholder="you@example.com" required aria-label="Email for newsletter">
+        <button type="submit" class="newsletter-btn">Subscribe</button>
+      </form>
+      <p class="mt-3" style="font-size:0.75rem;opacity:0.4" id="newsletter-msg"></p>
+    </div>
+  </section>
+
+  <!-- ═══ Footer ═══ -->
+  <footer class="vook-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+          <a class="vook-logo mb-3 d-inline-flex" href="index.html" style="color:var(--vook-cream)!important">
+            <span class="logo-icon"><i class="bi bi-book-half"></i></span> PAGEWISE
+          </a>
+          <p style="font-size:0.88rem;margin-top:0.75rem">Find Your Next Chapter. A curated bookstore for thoughtful readers.</p>
+          <div class="footer-social mt-3">
+            <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6>Shop</h6>
+          <ul class="footer-links">
+            <li><a href="shop.html">All Books</a></li>
+            <li><a href="shop.html?sort=bestseller">Bestsellers</a></li>
+            <li><a href="shop.html?sort=newest">New Arrivals</a></li>
+            <li><a href="shop.html?filter=under299">Under ₹299</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6>Account</h6>
+          <ul class="footer-links">
+            <li><a href="profile.html">My Profile</a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6>Support</h6>
+          <ul class="footer-links">
+            <li><a href="#">Help Centre</a></li>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 col-6">
+          <h6>Legal</h6>
+          <ul class="footer-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom text-center">
+        <p class="mb-0">&copy; 2026 PAGEWISE. All rights reserved. This is a frontend prototype for demonstration purposes.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ Mobile Bottom Navigation ═══ -->
+  <nav class="mobile-bottom-nav" id="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item active" aria-label="Home">
+      <i class="bi bi-house"></i> <span>Home</span>
+    </a>
+    <a href="shop.html" class="mobile-nav-item" aria-label="Explore">
+      <i class="bi bi-compass"></i> <span>Explore</span>
+    </a>
+    <a href="wishlist.html" class="mobile-nav-item" aria-label="Wishlist">
+      <i class="bi bi-heart"></i> <span>Wishlist</span>
+      <span class="wishlist-badge" style="display:none;position:absolute;top:2px;right:calc(50% - 18px)">0</span>
+    </a>
+    <a href="cart.html" class="mobile-nav-item" aria-label="Cart">
+      <i class="bi bi-bag"></i> <span>Cart</span>
+      <span class="cart-badge" style="display:none;position:absolute;top:2px;right:calc(50% - 18px)">0</span>
+    </a>
+    <a href="profile.html" class="mobile-nav-item" aria-label="Profile">
+      <i class="bi bi-person"></i> <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- Auth Modal -->
+  <div class="modal fade" id="authModal" tabindex="-1" aria-label="Sign In or Register">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-heading">Welcome to PAGEWISE</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="nav auth-tabs mb-3 justify-content-center" role="tablist">
+            <li class="nav-item"><button class="nav-link active" data-bs-toggle="tab" data-bs-target="#signin-tab">Sign In</button></li>
+            <li class="nav-item"><button class="nav-link" data-bs-toggle="tab" data-bs-target="#register-tab">Register</button></li>
+          </ul>
+          <div class="tab-content">
+            <div class="tab-pane fade show active" id="signin-tab">
+              <form id="signin-form">
+                <div class="mb-3">
+                  <label class="form-label" for="signin-email">Email</label>
+                  <input type="email" class="form-control" id="signin-email" placeholder="you@example.com" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="signin-password">Password</label>
+                  <input type="password" class="form-control" id="signin-password" placeholder="Enter password" required>
+                </div>
+                <button type="submit" class="btn btn-vook w-100">Sign In</button>
+                <p class="text-center mt-3 sample-data-label">This is a simulated sign-in for the local prototype. No real authentication occurs.</p>
+              </form>
+            </div>
+            <div class="tab-pane fade" id="register-tab">
+              <form id="register-form">
+                <div class="mb-3">
+                  <label class="form-label" for="reg-name">Full Name</label>
+                  <input type="text" class="form-control" id="reg-name" placeholder="Your name" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="reg-email">Email</label>
+                  <input type="email" class="form-control" id="reg-email" placeholder="you@example.com" required>
+                </div>
+                <div class="mb-3">
+                  <label class="form-label" for="reg-password">Password</label>
+                  <input type="password" class="form-control" id="reg-password" placeholder="Create password" required minlength="6">
+                </div>
+                <button type="submit" class="btn btn-vook w-100">Create Account</button>
+                <p class="text-center mt-3 sample-data-label">This is a simulated registration. Production use requires a trusted backend for authentication.</p>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const books = getBooks();
+
+    // ── Categories dropdown in navbar ──
+    const catDropdown = document.getElementById('nav-categories-dropdown');
+    if (catDropdown) {
+      CATEGORIES.forEach(cat => {
+        const li = document.createElement('li');
+        li.innerHTML = `<a class="dropdown-item" href="shop.html?category=${cat.id}"><i class="bi ${cat.icon} me-2"></i>${cat.name}</a>`;
+        catDropdown.appendChild(li);
+      });
+    }
+
+    // ── Categories Grid ──
+    const catGrid = document.getElementById('categories-grid');
+    if (catGrid) {
+      CATEGORIES.forEach(cat => {
+        const col = document.createElement('div');
+        col.className = 'col';
+        col.innerHTML = `<a href="shop.html?category=${cat.id}" class="category-card"><div class="cat-icon"><i class="bi ${cat.icon}"></i></div><span class="cat-name">${cat.name}</span></a>`;
+        catGrid.appendChild(col);
+      });
+    }
+
+    // ── Hero Book Stack ──
+    const heroStack = document.getElementById('hero-books-stack');
+    if (heroStack) {
+      const featured = books.filter(b => b.isFeatured).slice(0, 5);
+      featured.forEach(b => {
+        const img = document.createElement('img');
+        img.src = b.cover;
+        img.alt = b.title;
+        img.className = 'hero-book-img';
+        img.loading = 'lazy';
+        img.onerror = function(){ this.src = 'https://placehold.co/160x240/1a2332/f5f0e8?text=PAGEWISE'; };
+        heroStack.appendChild(img);
+      });
+    }
+
+    // ── Trending ──
+    const trendingRow = document.getElementById('trending-row');
+    if (trendingRow) {
+      const trending = books.filter(b => b.isBestseller || b.rating >= 4.5).sort((a,b) => b.reviewCount - a.reviewCount).slice(0, 10);
+      trending.forEach(b => {
+        const div = document.createElement('div');
+        div.className = 'book-scroll-item';
+        div.innerHTML = renderBookCard(b);
+        // remove col wrapper for scroll items
+        const cardEl = div.querySelector('.col');
+        if (cardEl) div.innerHTML = cardEl.innerHTML;
+        trendingRow.appendChild(div);
+      });
+    }
+
+    // ── Curated Collections (first 3) ──
+    const collectionsContainer = document.getElementById('collections-container');
+    if (collectionsContainer) {
+      COLLECTIONS.slice(0, 3).forEach(col => {
+        const section = document.createElement('div');
+        section.className = 'mb-5';
+        const colBooks = col.bookIds.map(id => getBookById(id)).filter(Boolean);
+        section.innerHTML = `
+          <div class="d-flex justify-content-between align-items-end mb-3">
+            <div><h2 class="section-title mb-1">${col.title}</h2><div class="section-divider"></div><p class="section-subtitle mb-0">${col.description}</p></div>
+          </div>
+          <div class="book-scroll-row">${colBooks.map(b => {
+            const card = renderBookCard(b);
+            const temp = document.createElement('div');
+            temp.innerHTML = card;
+            const inner = temp.querySelector('.col');
+            return `<div class="book-scroll-item">${inner ? inner.innerHTML : card}</div>`;
+          }).join('')}</div>`;
+        collectionsContainer.appendChild(section);
+      });
+    }
+
+    // ── Bestsellers Grid ──
+    const bsGrid = document.getElementById('bestsellers-grid');
+    if (bsGrid) {
+      books.filter(b => b.isBestseller).slice(0, 5).forEach(b => {
+        bsGrid.innerHTML += renderBookCard(b);
+      });
+    }
+
+    // ── Staff Picks ──
+    const spGrid = document.getElementById('staff-picks-grid');
+    if (spGrid) {
+      STAFF_PICKS.slice(0, 3).forEach(pick => {
+        const book = getBookById(pick.bookId);
+        if (!book) return;
+        spGrid.innerHTML += `
+          <div class="col-md-4">
+            <div class="book-card h-100" data-book-id="${book.id}">
+              <div class="book-card-img-wrap">
+                <a href="book-details.html?id=${book.id}">
+                  <img src="${book.cover}" alt="${book.title}" loading="lazy" onerror="this.src='https://placehold.co/200x300/1a2332/f5f0e8?text=VOOK'">
+                </a>
+              </div>
+              <div class="book-card-body">
+                <a href="book-details.html?id=${book.id}" class="book-card-title">${book.title}</a>
+                <p class="book-card-author">by ${book.author}</p>
+                <p class="staff-pick-note">"${pick.note}"</p>
+                <div class="book-card-price mt-auto pt-2">
+                  <span class="price-current">${formatPrice(book.sellingPrice)}</span>
+                  ${book.originalPrice > book.sellingPrice ? `<span class="price-original">${formatPrice(book.originalPrice)}</span>` : ''}
+                </div>
+                <button class="btn btn-vook btn-sm w-100 mt-2" onclick="addToCart(${book.id})"><i class="bi bi-cart-plus"></i> Add to Cart</button>
+              </div>
+            </div>
+          </div>`;
+      });
+    }
+
+    // ── New Arrivals ──
+    const naRow = document.getElementById('new-arrivals-row');
+    if (naRow) {
+      // Use books sorted by publish date descending
+      const newBooks = [...books].sort((a,b) => new Date(b.publishDate) - new Date(a.publishDate)).slice(0, 10);
+      newBooks.forEach(b => {
+        const card = renderBookCard(b);
+        const temp = document.createElement('div');
+        temp.innerHTML = card;
+        const inner = temp.querySelector('.col');
+        naRow.innerHTML += `<div class="book-scroll-item">${inner ? inner.innerHTML : card}</div>`;
+      });
+    }
+
+    // ── Testimonials ──
+    const testiGrid = document.getElementById('testimonials-grid');
+    if (testiGrid) {
+      TESTIMONIALS.forEach(t => {
+        testiGrid.innerHTML += `
+          <div class="col-md-6 col-lg-3">
+            <div class="testimonial-card">
+              <i class="bi bi-quote quote-icon"></i>
+              <p class="testimonial-text">${t.text}</p>
+              <div class="d-flex align-items-center gap-2">
+                <div class="avatar-placeholder" style="width:36px;height:36px;font-size:0.9rem"><i class="bi bi-person"></i></div>
+                <div>
+                  <div class="testimonial-name">${t.name}</div>
+                  <div>${renderStars(t.rating)}</div>
+                </div>
+              </div>
+              ${t.isSample ? '<p class="sample-data-label mt-2 mb-0">Sample testimonial</p>' : ''}
+            </div>
+          </div>`;
+      });
+    }
+
+    // ── Newsletter ──
+    const nlForm = document.getElementById('newsletter-form');
+    if (nlForm) {
+      nlForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = nlForm.querySelector('input[type="email"]').value;
+        if (email) {
+          document.getElementById('newsletter-msg').textContent = '✓ Thank you for subscribing! (Simulated — no email sent)';
+          nlForm.reset();
+          showToast('Subscribed successfully! (Simulated)', 'success');
+        }
+      });
+    }
+
+    // ── Auth Modal ──
+    const signinForm = document.getElementById('signin-form');
+    if (signinForm) {
+      signinForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const email = document.getElementById('signin-email').value;
+        const user = ensureUser();
+        user.email = email;
+        user.isRegistered = true;
+        user.name = user.name || email.split('@')[0];
+        saveUser(user);
+        bootstrap.Modal.getInstance(document.getElementById('authModal'))?.hide();
+        showToast('Signed in successfully! (Simulated)', 'success');
+      });
+    }
+
+    const registerForm = document.getElementById('register-form');
+    if (registerForm) {
+      registerForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const name = document.getElementById('reg-name').value;
+        const email = document.getElementById('reg-email').value;
+        const user = ensureUser();
+        user.name = name;
+        user.email = email;
+        user.isRegistered = true;
+        user.joinDate = new Date().toISOString();
+        saveUser(user);
+        bootstrap.Modal.getInstance(document.getElementById('authModal'))?.hide();
+        showToast(`Welcome to PAGEWISE, ${name}!`, 'success');
+      });
+    }
+
+    // ── Navbar scroll effect ──
+    window.addEventListener('scroll', () => {
+      document.getElementById('main-navbar')?.classList.toggle('scrolled', window.scrollY > 10);
+    }, { passive: true });
+  });
+  </script>
+</body>
+</html>

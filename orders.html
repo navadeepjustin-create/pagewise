@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order History & Tracking — PAGEWISE | Premium Online Bookstore</title>
+  <meta name="description" content="View past book orders, track deliveries, download receipts, and manage reorders with PAGEWISE.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='18' width='100' height='100' fill='%231A2332'/><text x='50' y='68' text-anchor='middle' font-size='52' font-family='serif' font-weight='bold' fill='%23D4A843'>P</text></svg>">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- VOOK -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ═══ Announcement Bar ═══ -->
+  <div class="announcement-bar" id="announcement-bar">
+    <span>📚 <strong>Autumn Book Festival</strong> — Use code <a href="shop.html">WELCOME10</a> for 10% off your first order!</span>
+    <button class="announcement-close" aria-label="Dismiss announcement"><i class="bi bi-x-lg"></i></button>
+  </div>
+
+  <!-- ═══ Navbar ═══ -->
+  <nav class="navbar navbar-expand-lg vook-navbar" id="main-navbar">
+    <div class="container">
+      <a class="navbar-brand vook-logo" href="index.html">
+        <span class="logo-icon"><i class="bi bi-book-half"></i></span>
+        PAGEWISE
+      </a>
+
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="nav-icon-btn dark-mode-toggle" aria-label="Toggle dark mode"><i class="bi bi-moon-fill"></i></button>
+        <a href="wishlist.html" class="nav-icon-link" aria-label="Wishlist">
+          <i class="bi bi-heart"></i>
+          <span class="wishlist-badge" style="display:none">0</span>
+        </a>
+        <a href="cart.html" class="nav-icon-link" aria-label="Cart">
+          <i class="bi bi-bag"></i>
+          <span class="cart-badge" style="display:none">0</span>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="shop.html">Explore Books</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Categories</a>
+            <ul class="dropdown-menu" id="nav-categories-dropdown"></ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="shop.html?sort=bestseller">Bestsellers</a></li>
+          <li class="nav-item"><a class="nav-link" href="shop.html?sort=newest">New Arrivals</a></li>
+        </ul>
+
+        <div class="vook-search-wrap d-none d-lg-block me-3">
+          <i class="bi bi-search vook-search-icon"></i>
+          <input type="search" class="vook-search-input" placeholder="Search books, authors…" aria-label="Search books">
+        </div>
+
+        <div class="d-none d-lg-flex align-items-center gap-1">
+          <button class="nav-icon-btn dark-mode-toggle" aria-label="Toggle dark mode"><i class="bi bi-moon-fill"></i></button>
+          <a href="wishlist.html" class="nav-icon-link" aria-label="Wishlist">
+            <i class="bi bi-heart"></i>
+            <span class="wishlist-badge" style="display:none">0</span>
+          </a>
+          <a href="cart.html" class="nav-icon-link" aria-label="Cart">
+            <i class="bi bi-bag"></i>
+            <span class="cart-badge" style="display:none">0</span>
+          </a>
+          <a href="profile.html" class="nav-icon-link" aria-label="Account">
+            <i class="bi bi-person"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumbs -->
+  <section class="py-3 border-bottom" style="background:var(--vook-cream-light)">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb vook-breadcrumb mb-0">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item"><a href="profile.html">My Account</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Order History</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ═══ Main Orders Section ═══ -->
+  <main class="section-padding py-5">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+        <div>
+          <h1 class="h2 fw-heading mb-1">Your Orders</h1>
+          <p class="text-muted mb-0" id="orders-subtitle">Track, view details, or reorder books</p>
+        </div>
+        <div class="d-flex align-items-center gap-2">
+          <input type="text" id="order-search-input" class="form-control form-control-sm" placeholder="Filter by Order ID or Title…" style="max-width: 250px;">
+        </div>
+      </div>
+
+      <!-- Orders List Container -->
+      <div id="orders-list-container">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </main>
+
+  <!-- Invoice / Receipt Modal -->
+  <div class="modal fade" id="invoiceModal" tabindex="-1" aria-label="Order Receipt">
+    <div class="modal-dialog modal-dialog-centered modal-lg">
+      <div class="modal-content">
+        <div class="modal-header border-0 pb-0">
+          <h5 class="modal-title fw-heading">Order Receipt</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body p-4" id="invoice-modal-content">
+          <!-- Filled by JS -->
+        </div>
+        <div class="modal-footer border-0 pt-0">
+          <button type="button" class="btn btn-outline-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-vook" onclick="window.print()">
+            <i class="bi bi-printer me-1"></i> Print Receipt
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ═══ Footer ═══ -->
+  <footer class="vook-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+          <a class="vook-logo mb-3 d-inline-flex" href="index.html" style="color:var(--vook-cream)!important">
+            <span class="logo-icon"><i class="bi bi-book-half"></i></span> PAGEWISE
+          </a>
+          <p style="font-size:0.88rem;margin-top:0.75rem">Find Your Next Chapter. A curated bookstore for thoughtful readers.</p>
+          <div class="footer-social mt-3">
+            <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6>Shop</h6>
+          <ul class="footer-links">
+            <li><a href="shop.html">All Books</a></li>
+            <li><a href="shop.html?sort=bestseller">Bestsellers</a></li>
+            <li><a href="shop.html?sort=newest">New Arrivals</a></li>
+            <li><a href="shop.html?filter=under299">Under ₹299</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6>Account</h6>
+          <ul class="footer-links">
+            <li><a href="profile.html">My Profile</a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6>Support</h6>
+          <ul class="footer-links">
+            <li><a href="#">Help Centre</a></li>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 col-6">
+          <h6>Legal</h6>
+          <ul class="footer-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom text-center">
+        <p class="mb-0">&copy; 2026 PAGEWISE. All rights reserved. This is a frontend prototype for demonstration purposes.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ Mobile Bottom Navigation ═══ -->
+  <nav class="mobile-bottom-nav" id="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item" aria-label="Home">
+      <i class="bi bi-house"></i> <span>Home</span>
+    </a>
+    <a href="shop.html" class="mobile-nav-item" aria-label="Explore">
+      <i class="bi bi-compass"></i> <span>Explore</span>
+    </a>
+    <a href="wishlist.html" class="mobile-nav-item" aria-label="Wishlist">
+      <i class="bi bi-heart"></i> <span>Wishlist</span>
+      <span class="wishlist-badge" style="display:none;position:absolute;top:2px;right:calc(50% - 18px)">0</span>
+    </a>
+    <a href="cart.html" class="mobile-nav-item" aria-label="Cart">
+      <i class="bi bi-bag"></i> <span>Cart</span>
+      <span class="cart-badge" style="display:none;position:absolute;top:2px;right:calc(50% - 18px)">0</span>
+    </a>
+    <a href="profile.html" class="mobile-nav-item" aria-label="Profile">
+      <i class="bi bi-person"></i> <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Navbar categories
+      const catDropdown = document.getElementById('nav-categories-dropdown');
+      if (catDropdown) {
+        CATEGORIES.forEach(cat => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a class="dropdown-item" href="shop.html?category=${cat.id}"><i class="bi ${cat.icon} me-2"></i>${cat.name}</a>`;
+          catDropdown.appendChild(li);
+        });
+      }
+
+      renderOrders();
+
+      // Search filter
+      const searchInput = document.getElementById('order-search-input');
+      if (searchInput) {
+        searchInput.addEventListener('input', () => {
+          renderOrders(searchInput.value.trim().toLowerCase());
+        });
+      }
+    });
+
+    function renderOrders(filterQuery = '') {
+      let orders = getOrders();
+      const container = document.getElementById('orders-list-container');
+      const subtitle = document.getElementById('orders-subtitle');
+
+      // Check URL query param for specific ID
+      const params = new URLSearchParams(window.location.search);
+      const targetId = params.get('id');
+      if (targetId && !filterQuery) {
+        filterQuery = targetId.toLowerCase();
+        const searchInput = document.getElementById('order-search-input');
+        if (searchInput) searchInput.value = targetId;
+      }
+
+      if (filterQuery) {
+        orders = orders.filter(o =>
+          o.id.toLowerCase().includes(filterQuery) ||
+          o.items.some(i => i.title.toLowerCase().includes(filterQuery))
+        );
+      }
+
+      if (!orders || orders.length === 0) {
+        if (subtitle) subtitle.textContent = 'No orders found';
+        container.innerHTML = `
+          <div class="empty-state text-center py-5">
+            <div class="empty-state-icon fs-1 text-muted mb-3"><i class="bi bi-box-seam"></i></div>
+            <h3 class="fw-heading">No Orders Yet</h3>
+            <p class="text-muted mb-4">When you purchase books on PAGEWISE, your order history and tracking updates will appear here.</p>
+            <a href="shop.html" class="btn btn-vook btn-lg px-4"><i class="bi bi-compass me-2"></i> Browse the Bookstore</a>
+          </div>
+        `;
+        return;
+      }
+
+      if (subtitle) subtitle.textContent = `Showing ${orders.length} order${orders.length > 1 ? 's' : ''}`;
+
+      container.innerHTML = orders.map(order => {
+        const orderDate = new Date(order.date).toLocaleDateString('en-IN', {
+          year: 'numeric',
+          month: 'long',
+          day: 'numeric',
+          hour: '2-digit',
+          minute: '2-digit'
+        });
+
+        const statusClass = 
+          order.status === 'Delivered' ? 'bg-success' :
+          order.status === 'Cancelled' ? 'bg-danger' :
+          order.status === 'Shipped' ? 'bg-info text-dark' : 'bg-primary';
+
+        // Tracking steps status index
+        const steps = ['Order Placed', 'Processing', 'Shipped', 'Delivered'];
+        let activeStepIdx = 1; // Default Confirmed/Processing
+        if (order.status === 'Shipped') activeStepIdx = 2;
+        if (order.status === 'Delivered') activeStepIdx = 3;
+        if (order.status === 'Cancelled') activeStepIdx = -1;
+
+        return `
+          <div class="card border-0 shadow-sm mb-4 overflow-hidden">
+            <!-- Header Bar -->
+            <div class="card-header bg-light border-0 py-3 px-4 d-flex flex-wrap justify-content-between align-items-center gap-2">
+              <div>
+                <span class="badge ${statusClass} me-2 text-uppercase" style="letter-spacing:0.5px">${order.status}</span>
+                <span class="fw-bold text-accent fs-6">Order #${order.id}</span>
+                <span class="text-muted small ms-2 d-none d-md-inline">• Placed on ${orderDate}</span>
+              </div>
+              <div class="d-flex align-items-center gap-2">
+                <span class="fw-bold fs-5 text-dark me-2">₹${order.total}</span>
+                <button class="btn btn-outline-dark btn-sm" onclick="showInvoiceModal('${order.id}')">
+                  <i class="bi bi-receipt me-1"></i> Receipt
+                </button>
+              </div>
+            </div>
+
+            <div class="card-body p-4">
+              <!-- Visual Delivery Stepper -->
+              ${activeStepIdx >= 0 ? `
+                <div class="delivery-tracker py-3 mb-4 border-bottom">
+                  <div class="d-flex justify-content-between text-center position-relative">
+                    ${steps.map((s, idx) => `
+                      <div class="step flex-grow-1">
+                        <div class="step-circle mx-auto mb-1 rounded-circle d-flex align-items-center justify-content-center ${idx <= activeStepIdx ? 'bg-primary text-white' : 'bg-light text-muted border'}" style="width:32px; height:32px; font-size:0.85rem">
+                          ${idx <= activeStepIdx ? '<i class="bi bi-check"></i>' : idx + 1}
+                        </div>
+                        <span class="small ${idx <= activeStepIdx ? 'fw-bold text-dark' : 'text-muted'}" style="font-size:0.75rem">${s}</span>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+              ` : `
+                <div class="alert alert-danger py-2 small mb-4">
+                  <i class="bi bi-x-circle me-1"></i> This order was cancelled.
+                </div>
+              `}
+
+              <!-- Items in Order -->
+              <div class="row g-3 mb-4">
+                <div class="col-lg-8">
+                  <div class="d-flex flex-column gap-3">
+                    ${order.items.map(item => `
+                      <div class="d-flex align-items-center gap-3">
+                        <a href="book-details.html?id=${item.bookId}">
+                          <img src="${item.cover}" alt="${item.title}" class="rounded border shadow-sm" style="width:50px; height:72px; object-fit: cover;" onerror="this.src='https://placehold.co/100x150/1a2332/f5f0e8?text=PAGEWISE'">
+                        </a>
+                        <div class="flex-grow-1 min-w-0">
+                          <h6 class="mb-0 text-truncate fw-semibold">
+                            <a href="book-details.html?id=${item.bookId}" class="text-decoration-none text-dark">${item.title}</a>
+                          </h6>
+                          <small class="text-muted d-block">${item.author}</small>
+                          <small class="text-secondary">Qty: ${item.qty} × ₹${item.price}</small>
+                        </div>
+                        <div class="text-end fw-semibold">
+                          ₹${item.price * item.qty}
+                        </div>
+                      </div>
+                    `).join('')}
+                  </div>
+                </div>
+
+                <!-- Shipping Address & Details -->
+                <div class="col-lg-4 border-start-lg ps-lg-4">
+                  <div class="bg-light p-3 rounded-3 h-100 small">
+                    <h6 class="fw-semibold mb-2">Delivery Address</h6>
+                    <div><strong>${order.shippingAddress.fullName}</strong></div>
+                    <div class="text-muted">${order.shippingAddress.street}</div>
+                    <div class="text-muted">${order.shippingAddress.city}, ${order.shippingAddress.state} - ${order.shippingAddress.pincode}</div>
+                    <div class="text-muted mt-1"><i class="bi bi-telephone me-1"></i>${order.shippingAddress.phone}</div>
+
+                    <hr class="my-2">
+                    <div class="d-flex justify-content-between text-muted mb-1">
+                      <span>Payment:</span>
+                      <strong class="text-dark">${order.paymentMethod}</strong>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Footer Actions -->
+              <div class="d-flex flex-wrap justify-content-between align-items-center pt-3 border-top gap-2">
+                <div>
+                  ${order.status === 'Confirmed' || order.status === 'Processing' ? `
+                    <button class="btn btn-outline-danger btn-sm" onclick="handleCancelOrder('${order.id}')">
+                      Cancel Order
+                    </button>
+                  ` : ''}
+                </div>
+
+                <div class="d-flex gap-2">
+                  <button class="btn btn-outline-vook btn-sm px-3" onclick="handleReorder('${order.id}')">
+                    <i class="bi bi-arrow-repeat me-1"></i> Buy Again
+                  </button>
+                </div>
+              </div>
+
+            </div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Cancel Order Handler
+    window.handleCancelOrder = function(orderId) {
+      if (!confirm(`Are you sure you want to cancel order #${orderId}?`)) return;
+
+      const orders = getOrders();
+      const order = orders.find(o => o.id === orderId);
+      if (!order) return;
+
+      // 1. Update status
+      updateOrderStatus(orderId, 'Cancelled');
+
+      // 2. Restore inventory
+      order.items.forEach(item => {
+        updateStock(item.bookId, item.qty);
+      });
+
+      showToast(`Order #${orderId} has been cancelled and refunded.`, 'info');
+      renderOrders();
+    };
+
+    // Reorder Handler (adds all order items back to cart)
+    window.handleReorder = function(orderId) {
+      const order = getOrders().find(o => o.id === orderId);
+      if (!order) return;
+
+      let added = 0;
+      order.items.forEach(item => {
+        addToCart(item.bookId, item.qty);
+        added++;
+      });
+
+      showToast(`Added items from order #${orderId} to your shopping bag!`, 'success');
+      window.location.href = 'cart.html';
+    };
+
+    // Show Invoice Modal
+    window.showInvoiceModal = function(orderId) {
+      const order = getOrders().find(o => o.id === orderId);
+      if (!order) return;
+
+      const content = document.getElementById('invoice-modal-content');
+      const orderDate = new Date(order.date).toLocaleDateString('en-IN', {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric'
+      });
+
+      content.innerHTML = `
+        <div class="d-flex justify-content-between align-items-start mb-4 border-bottom pb-3">
+          <div>
+            <h4 class="fw-heading text-dark mb-1"><span class="text-accent">PAGEWISE</span> Bookstore</h4>
+            <div class="text-muted small">Curated reads & literature</div>
+            <div class="text-muted small">www.pagewise.in</div>
+          </div>
+          <div class="text-end">
+            <h5 class="mb-0 text-accent">TAX INVOICE</h5>
+            <div class="small fw-bold">#${order.id}</div>
+            <div class="text-muted small">${orderDate}</div>
+          </div>
+        </div>
+
+        <div class="row g-3 mb-4 small">
+          <div class="col-6">
+            <strong class="text-muted d-block">Billed To:</strong>
+            <div>${order.shippingAddress.fullName}</div>
+            <div>${order.shippingAddress.street}</div>
+            <div>${order.shippingAddress.city}, ${order.shippingAddress.state} - ${order.shippingAddress.pincode}</div>
+            <div>Ph: ${order.shippingAddress.phone}</div>
+          </div>
+          <div class="col-6 text-end">
+            <strong class="text-muted d-block">Payment Method:</strong>
+            <div class="text-capitalize">${order.paymentMethod} (Simulated)</div>
+            <strong class="text-muted d-block mt-2">Status:</strong>
+            <div class="badge bg-success">${order.status}</div>
+          </div>
+        </div>
+
+        <div class="table-responsive mb-4">
+          <table class="table table-bordered table-sm small">
+            <thead class="table-light">
+              <tr>
+                <th>Item Description</th>
+                <th class="text-center">Qty</th>
+                <th class="text-end">Unit Price</th>
+                <th class="text-end">Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              ${order.items.map(i => `
+                <tr>
+                  <td>${i.title} <small class="text-muted d-block">by ${i.author}</small></td>
+                  <td class="text-center">${i.qty}</td>
+                  <td class="text-end">₹${i.price}</td>
+                  <td class="text-end">₹${i.price * i.qty}</td>
+                </tr>
+              `).join('')}
+            </tbody>
+            <tfoot>
+              <tr>
+                <td colspan="3" class="text-end">Items Subtotal:</td>
+                <td class="text-end">₹${order.subtotal}</td>
+              </tr>
+              ${order.couponDiscount > 0 ? `
+                <tr>
+                  <td colspan="3" class="text-end text-success">Coupon Discount (${order.couponCode}):</td>
+                  <td class="text-end text-success">- ₹${order.couponDiscount}</td>
+                </tr>
+              ` : ''}
+              <tr>
+                <td colspan="3" class="text-end">Shipping Fee:</td>
+                <td class="text-end">${order.shippingFee === 0 ? 'FREE' : '₹' + order.shippingFee}</td>
+              </tr>
+              <tr class="fw-bold fs-6 table-light">
+                <td colspan="3" class="text-end">Grand Total:</td>
+                <td class="text-end text-accent">₹${order.total}</td>
+              </tr>
+            </tfoot>
+          </table>
+        </div>
+
+        <div class="text-center text-muted small border-top pt-3">
+          Thank you for choosing PAGEWISE. Happy reading!
+          <p class="sample-data-label mt-1 mb-0">Frontend prototype receipt for demonstration purposes.</p>
+        </div>
+      `;
+
+      new bootstrap.Modal(document.getElementById('invoiceModal')).show();
+    };
+  </script>
+</body>
+</html>

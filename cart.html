@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Shopping Cart — PAGEWISE | Premium Online Bookstore</title>
+  <meta name="description" content="Review your selected books, apply discount coupons, and proceed to checkout with PAGEWISE.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='18' width='100' height='100' fill='%231A2332'/><text x='50' y='68' text-anchor='middle' font-size='52' font-family='serif' font-weight='bold' fill='%23D4A843'>P</text></svg>">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- VOOK -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ═══ Announcement Bar ═══ -->
+  <div class="announcement-bar" id="announcement-bar">
+    <span>📚 <strong>Autumn Book Festival</strong> — Use code <a href="shop.html">WELCOME10</a> for 10% off your first order!</span>
+    <button class="announcement-close" aria-label="Dismiss announcement"><i class="bi bi-x-lg"></i></button>
+  </div>
+
+  <!-- ═══ Navbar ═══ -->
+  <nav class="navbar navbar-expand-lg vook-navbar" id="main-navbar">
+    <div class="container">
+      <a class="navbar-brand vook-logo" href="index.html">
+        <span class="logo-icon"><i class="bi bi-book-half"></i></span>
+        PAGEWISE
+      </a>
+
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="nav-icon-btn dark-mode-toggle" aria-label="Toggle dark mode"><i class="bi bi-moon-fill"></i></button>
+        <a href="wishlist.html" class="nav-icon-link" aria-label="Wishlist">
+          <i class="bi bi-heart"></i>
+          <span class="wishlist-badge" style="display:none">0</span>
+        </a>
+        <a href="cart.html" class="nav-icon-link active" aria-label="Cart">
+          <i class="bi bi-bag"></i>
+          <span class="cart-badge" style="display:none">0</span>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="shop.html">Explore Books</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Categories</a>
+            <ul class="dropdown-menu" id="nav-categories-dropdown"></ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="shop.html?sort=bestseller">Bestsellers</a></li>
+          <li class="nav-item"><a class="nav-link" href="shop.html?sort=newest">New Arrivals</a></li>
+        </ul>
+
+        <div class="vook-search-wrap d-none d-lg-block me-3">
+          <i class="bi bi-search vook-search-icon"></i>
+          <input type="search" class="vook-search-input" placeholder="Search books, authors…" aria-label="Search books">
+        </div>
+
+        <div class="d-none d-lg-flex align-items-center gap-1">
+          <button class="nav-icon-btn dark-mode-toggle" aria-label="Toggle dark mode"><i class="bi bi-moon-fill"></i></button>
+          <a href="wishlist.html" class="nav-icon-link" aria-label="Wishlist">
+            <i class="bi bi-heart"></i>
+            <span class="wishlist-badge" style="display:none">0</span>
+          </a>
+          <a href="cart.html" class="nav-icon-link active" aria-label="Cart">
+            <i class="bi bi-bag"></i>
+            <span class="cart-badge" style="display:none">0</span>
+          </a>
+          <a href="profile.html" class="nav-icon-link" aria-label="Account">
+            <i class="bi bi-person"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumbs -->
+  <section class="py-3 border-bottom" style="background:var(--vook-cream-light)">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb vook-breadcrumb mb-0">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">Shopping Bag</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ═══ Cart Main Section ═══ -->
+  <main class="section-padding py-5">
+    <div class="container">
+      <div class="d-flex justify-content-between align-items-baseline mb-4">
+        <div>
+          <h1 class="h2 fw-heading mb-1">Your Shopping Bag</h1>
+          <p class="text-muted mb-0" id="cart-item-count-label">Review your items</p>
+        </div>
+        <button class="btn btn-ghost text-danger btn-sm" id="clear-cart-btn" onclick="handleClearCart()" style="display:none">
+          <i class="bi bi-trash3 me-1"></i> Clear Cart
+        </button>
+      </div>
+
+      <!-- Free Shipping Meter -->
+      <div class="card border-0 bg-light p-3 mb-4 shadow-sm" id="shipping-meter-card" style="display:none">
+        <div class="d-flex justify-content-between small fw-semibold mb-1">
+          <span id="shipping-meter-text"><i class="bi bi-truck text-accent me-1"></i> Add items for FREE delivery</span>
+          <span id="shipping-meter-pct">0%</span>
+        </div>
+        <div class="progress" style="height: 6px;">
+          <div class="progress-bar bg-accent" id="shipping-progress-bar" role="progressbar" style="width: 0%"></div>
+        </div>
+      </div>
+
+      <!-- Cart Content (Filled by JS) -->
+      <div id="cart-container">
+        <!-- Spinner while loading -->
+        <div class="text-center py-5">
+          <div class="spinner-border text-primary" role="status"></div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══ Footer ═══ -->
+  <footer class="vook-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+          <a class="vook-logo mb-3 d-inline-flex" href="index.html" style="color:var(--vook-cream)!important">
+            <span class="logo-icon"><i class="bi bi-book-half"></i></span> PAGEWISE
+          </a>
+          <p style="font-size:0.88rem;margin-top:0.75rem">Find Your Next Chapter. A curated bookstore for thoughtful readers.</p>
+          <div class="footer-social mt-3">
+            <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6>Shop</h6>
+          <ul class="footer-links">
+            <li><a href="shop.html">All Books</a></li>
+            <li><a href="shop.html?sort=bestseller">Bestsellers</a></li>
+            <li><a href="shop.html?sort=newest">New Arrivals</a></li>
+            <li><a href="shop.html?filter=under299">Under ₹299</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6>Account</h6>
+          <ul class="footer-links">
+            <li><a href="profile.html">My Profile</a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6>Support</h6>
+          <ul class="footer-links">
+            <li><a href="#">Help Centre</a></li>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 col-6">
+          <h6>Legal</h6>
+          <ul class="footer-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom text-center">
+        <p class="mb-0">&copy; 2026 PAGEWISE. All rights reserved. This is a frontend prototype for demonstration purposes.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ Mobile Bottom Navigation ═══ -->
+  <nav class="mobile-bottom-nav" id="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item" aria-label="Home">
+      <i class="bi bi-house"></i> <span>Home</span>
+    </a>
+    <a href="shop.html" class="mobile-nav-item" aria-label="Explore">
+      <i class="bi bi-compass"></i> <span>Explore</span>
+    </a>
+    <a href="wishlist.html" class="mobile-nav-item" aria-label="Wishlist">
+      <i class="bi bi-heart"></i> <span>Wishlist</span>
+      <span class="wishlist-badge" style="display:none;position:absolute;top:2px;right:calc(50% - 18px)">0</span>
+    </a>
+    <a href="cart.html" class="mobile-nav-item active" aria-label="Cart">
+      <i class="bi bi-bag"></i> <span>Cart</span>
+      <span class="cart-badge" style="display:none;position:absolute;top:2px;right:calc(50% - 18px)">0</span>
+    </a>
+    <a href="profile.html" class="mobile-nav-item" aria-label="Profile">
+      <i class="bi bi-person"></i> <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    // State for coupon
+    let appliedCoupon = null; // { code, discount, coupon }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      // Navbar categories
+      const catDropdown = document.getElementById('nav-categories-dropdown');
+      if (catDropdown) {
+        CATEGORIES.forEach(cat => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a class="dropdown-item" href="shop.html?category=${cat.id}"><i class="bi ${cat.icon} me-2"></i>${cat.name}</a>`;
+          catDropdown.appendChild(li);
+        });
+      }
+
+      // Check for saved coupon from session/storage if any
+      const savedCoupon = sessionStorage.getItem('pagewise_applied_coupon') || sessionStorage.getItem('vook_applied_coupon');
+      if (savedCoupon) {
+        try { appliedCoupon = JSON.parse(savedCoupon); } catch(e){}
+      }
+
+      renderCart();
+
+      // Listen for storage updates
+      window.addEventListener('cartUpdated', () => renderCart());
+    });
+
+    function renderCart() {
+      const cart = getCart();
+      const container = document.getElementById('cart-container');
+      const countLabel = document.getElementById('cart-item-count-label');
+      const clearBtn = document.getElementById('clear-cart-btn');
+      const meterCard = document.getElementById('shipping-meter-card');
+
+      if (!cart || cart.length === 0) {
+        if (countLabel) countLabel.textContent = '0 items in your bag';
+        if (clearBtn) clearBtn.style.display = 'none';
+        if (meterCard) meterCard.style.display = 'none';
+
+        container.innerHTML = `
+          <div class="empty-state text-center py-5">
+            <div class="empty-state-icon fs-1 text-muted mb-3"><i class="bi bi-bag-x"></i></div>
+            <h3 class="fw-heading">Your Bag is Empty</h3>
+            <p class="text-muted mb-4">Looks like you haven't added any books yet.</p>
+            <a href="shop.html" class="btn btn-vook btn-lg px-4"><i class="bi bi-compass me-2"></i> Explore Books</a>
+          </div>
+        `;
+        return;
+      }
+
+      const totalItems = getCartCount();
+      if (countLabel) countLabel.textContent = `${totalItems} book${totalItems > 1 ? 's' : ''} in your bag`;
+      if (clearBtn) clearBtn.style.display = 'inline-block';
+
+      const subtotal = getCartSubtotal();
+      const origTotal = getCartOriginalTotal();
+      const retailSavings = Math.max(0, origTotal - subtotal);
+
+      // Shipping threshold calculation
+      const freeThreshold = SHIPPING_CONFIG.freeThreshold;
+      const isFreeShipping = subtotal >= freeThreshold;
+      const shippingAmount = isFreeShipping ? 0 : SHIPPING_CONFIG.standardRate;
+      const amountNeeded = Math.max(0, freeThreshold - subtotal);
+      const shippingProgress = Math.min(100, Math.round((subtotal / freeThreshold) * 100));
+
+      if (meterCard) {
+        meterCard.style.display = 'block';
+        const pBar = document.getElementById('shipping-progress-bar');
+        const pText = document.getElementById('shipping-meter-text');
+        const pPct = document.getElementById('shipping-meter-pct');
+        if (pBar) pBar.style.width = `${shippingProgress}%`;
+        if (pPct) pPct.textContent = `${shippingProgress}%`;
+        if (pText) {
+          pText.innerHTML = isFreeShipping
+            ? `<i class="bi bi-check-circle-fill text-success me-1"></i> <strong>Congratulations!</strong> You have unlocked FREE Express Delivery.`
+            : `<i class="bi bi-truck text-accent me-1"></i> Add <strong>₹${amountNeeded}</strong> more to qualify for <strong>FREE Express Delivery</strong>.`;
+        }
+      }
+
+      // Re-validate coupon against current subtotal
+      let couponDiscount = 0;
+      if (appliedCoupon) {
+        const valRes = applyCoupon(appliedCoupon.code, subtotal);
+        if (valRes.valid) {
+          appliedCoupon.discount = valRes.discount;
+          couponDiscount = valRes.discount;
+        } else {
+          showToast(`Coupon removed: ${valRes.message}`, 'warning');
+          appliedCoupon = null;
+          sessionStorage.removeItem('pagewise_applied_coupon');
+          sessionStorage.removeItem('vook_applied_coupon');
+        }
+      }
+
+      const finalTotal = Math.max(0, roundMoney(subtotal - couponDiscount + shippingAmount));
+
+      // Render Layout
+      container.innerHTML = `
+        <div class="row g-4">
+          <!-- Items Column -->
+          <div class="col-lg-8">
+            <div class="card border-0 shadow-sm p-3 mb-4">
+              <div class="table-responsive">
+                <table class="table align-middle mb-0">
+                  <thead class="table-light small">
+                    <tr>
+                      <th scope="col" style="min-width: 250px;">Book</th>
+                      <th scope="col" class="text-center">Price</th>
+                      <th scope="col" class="text-center" style="width: 140px;">Quantity</th>
+                      <th scope="col" class="text-end">Total</th>
+                      <th scope="col" style="width: 40px;"></th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    ${cart.map(item => {
+                      const book = getBookById(item.bookId);
+                      if (!book) return '';
+                      const itemTotal = book.sellingPrice * item.qty;
+                      const stock = getStock(book.id);
+                      return `
+                        <tr>
+                          <td>
+                            <div class="d-flex align-items-center gap-3">
+                              <a href="book-details.html?id=${book.id}">
+                                <img src="${book.cover}" alt="${book.title}" 
+                                     class="rounded shadow-sm" 
+                                     style="width: 54px; height: 78px; object-fit: cover;"
+                                     onerror="this.src='https://placehold.co/100x150/1a2332/f5f0e8?text=PAGEWISE'">
+                              </a>
+                              <div>
+                                <a href="book-details.html?id=${book.id}" class="text-decoration-none fw-semibold text-dark d-block">
+                                  ${book.title}
+                                </a>
+                                <small class="text-muted d-block">${book.author}</small>
+                                <span class="badge text-bg-light border text-uppercase" style="font-size:0.7rem">${book.formats ? book.formats[0] : 'Paperback'}</span>
+                              </div>
+                            </div>
+                          </td>
+                          <td class="text-center">
+                            <span class="fw-semibold">₹${book.sellingPrice}</span>
+                            ${book.originalPrice > book.sellingPrice ? `<div class="text-decoration-line-through text-muted small">₹${book.originalPrice}</div>` : ''}
+                          </td>
+                          <td class="text-center">
+                            <div class="quantity-control mx-auto" style="width: 105px;">
+                              <button type="button" class="btn btn-sm btn-outline-secondary px-2" onclick="handleUpdateQty('${book.id}', ${item.qty - 1})">-</button>
+                              <input type="text" class="form-control form-control-sm text-center" value="${item.qty}" readonly>
+                              <button type="button" class="btn btn-sm btn-outline-secondary px-2" onclick="handleUpdateQty('${book.id}', ${item.qty + 1})" ${item.qty >= stock ? 'disabled' : ''}>+</button>
+                            </div>
+                            ${item.qty >= stock ? '<div class="text-danger small mt-1" style="font-size:0.7rem">Max stock reached</div>' : ''}
+                          </td>
+                          <td class="text-end fw-bold text-accent">
+                            ₹${itemTotal}
+                          </td>
+                          <td class="text-end">
+                            <button class="btn btn-ghost text-danger btn-sm p-1" onclick="handleRemoveItem('${book.id}')" title="Remove item">
+                              <i class="bi bi-x-lg"></i>
+                            </button>
+                          </td>
+                        </tr>
+                      `;
+                    }).join('')}
+                  </tbody>
+                </table>
+              </div>
+            </div>
+
+            <!-- Coupon Code & Guarantees Box -->
+            <div class="row g-3">
+              <div class="col-md-6">
+                <div class="card border-0 bg-light p-3 h-100">
+                  <h6 class="fw-semibold mb-2"><i class="bi bi-tag me-1 text-accent"></i> Apply Discount Coupon</h6>
+                  <p class="text-muted small mb-3">Try <code>WELCOME10</code>, <code>PAGE50</code>, or <code>READER100</code></p>
+                  <div class="input-group">
+                    <input type="text" id="coupon-code-input" class="form-control" placeholder="Enter coupon code" value="${appliedCoupon ? appliedCoupon.code : ''}" ${appliedCoupon ? 'disabled' : ''}>
+                    ${appliedCoupon ? `
+                      <button class="btn btn-outline-danger" type="button" onclick="handleRemoveCoupon()">Remove</button>
+                    ` : `
+                      <button class="btn btn-vook" type="button" onclick="handleApplyCoupon()">Apply</button>
+                    `}
+                  </div>
+                  ${appliedCoupon ? `
+                    <div class="text-success small mt-2 fw-semibold">
+                      <i class="bi bi-check-circle me-1"></i> Coupon "${appliedCoupon.code}" applied: You save ₹${couponDiscount}!
+                    </div>
+                  ` : ''}
+                </div>
+              </div>
+
+              <!-- Buyer Protection & Delivery Perks -->
+              <div class="col-md-6">
+                <div class="card border-0 bg-light p-3 h-100">
+                  <h6 class="fw-semibold mb-2"><i class="bi bi-shield-check me-1 text-success"></i> PAGEWISE Promise</h6>
+                  <ul class="list-unstyled small text-muted mb-0 d-flex flex-column gap-2">
+                    <li><i class="bi bi-check2 text-success me-2"></i><strong>100% Genuine</strong> publisher editions</li>
+                    <li><i class="bi bi-check2 text-success me-2"></i><strong>Premium protective packaging</strong></li>
+                    <li><i class="bi bi-check2 text-success me-2"></i><strong>7-Day Returns</strong> & fast support</li>
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Summary Column -->
+          <div class="col-lg-4">
+            <div class="card border-0 shadow-sm p-4 sticky-top" style="top: 100px;">
+              <h5 class="fw-heading mb-3">Order Summary</h5>
+              
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Total MRP</span>
+                <span>₹${origTotal}</span>
+              </div>
+
+              ${retailSavings > 0 ? `
+                <div class="d-flex justify-content-between mb-2 text-success">
+                  <span>Retail Savings</span>
+                  <span>- ₹${retailSavings}</span>
+                </div>
+              ` : ''}
+
+              <div class="d-flex justify-content-between mb-2">
+                <span class="text-muted">Subtotal</span>
+                <span>₹${subtotal}</span>
+              </div>
+
+              ${couponDiscount > 0 ? `
+                <div class="d-flex justify-content-between mb-2 text-success">
+                  <span>Coupon Discount (${appliedCoupon.code})</span>
+                  <span>- ₹${couponDiscount}</span>
+                </div>
+              ` : ''}
+
+              <div class="d-flex justify-content-between mb-3">
+                <span class="text-muted">Estimated Shipping</span>
+                <span>${shippingAmount === 0 ? '<span class="text-success fw-semibold">FREE</span>' : `₹${shippingAmount}`}</span>
+              </div>
+
+              <hr>
+
+              <div class="d-flex justify-content-between align-items-baseline mb-3">
+                <span class="h5 fw-bold mb-0">Total</span>
+                <span class="h3 fw-bold text-accent mb-0">₹${finalTotal}</span>
+              </div>
+
+              <button class="btn btn-vook btn-lg w-100 mb-3" onclick="handleProceedCheckout()">
+                Proceed to Checkout <i class="bi bi-arrow-right ms-1"></i>
+              </button>
+
+              <a href="shop.html" class="btn btn-ghost w-100 text-center small text-muted">
+                <i class="bi bi-arrow-left me-1"></i> Continue Shopping
+              </a>
+
+              <!-- Security Badges -->
+              <div class="mt-4 pt-3 border-top text-center text-muted small">
+                <div class="d-flex justify-content-center gap-3 mb-1">
+                  <span><i class="bi bi-shield-check text-success me-1"></i> SSL Secure</span>
+                  <span><i class="bi bi-patch-check text-primary me-1"></i> Verified</span>
+                </div>
+                <div style="font-size:0.75rem; opacity:0.7">Guaranteed safe & secure checkout</div>
+              </div>
+
+            </div>
+          </div>
+        </div>
+      `;
+    }
+
+    // Handlers
+    window.handleUpdateQty = function(bookId, newQty) {
+      updateCartQuantity(bookId, newQty);
+      renderCart();
+    };
+
+    window.handleRemoveItem = function(bookId) {
+      removeFromCart(bookId);
+      renderCart();
+    };
+
+    window.handleClearCart = function() {
+      if (confirm('Are you sure you want to remove all items from your bag?')) {
+        clearCart();
+        appliedCoupon = null;
+        sessionStorage.removeItem('pagewise_applied_coupon');
+        sessionStorage.removeItem('vook_applied_coupon');
+        renderCart();
+      }
+    };
+
+    window.handleApplyCoupon = function() {
+      const input = document.getElementById('coupon-code-input');
+      const code = input ? input.value.trim().toUpperCase() : '';
+      if (!code) {
+        showToast('Please enter a coupon code.', 'warning');
+        return;
+      }
+      const subtotal = getCartSubtotal();
+      const res = applyCoupon(code, subtotal);
+      if (res.valid) {
+        appliedCoupon = { code: res.coupon.code, discount: res.discount, coupon: res.coupon };
+        sessionStorage.setItem('pagewise_applied_coupon', JSON.stringify(appliedCoupon));
+        sessionStorage.setItem('vook_applied_coupon', JSON.stringify(appliedCoupon));
+        showToast(res.message, 'success');
+        renderCart();
+      } else {
+        showToast(res.message, 'error');
+      }
+    };
+
+    window.handleRemoveCoupon = function() {
+      appliedCoupon = null;
+      sessionStorage.removeItem('pagewise_applied_coupon');
+      sessionStorage.removeItem('vook_applied_coupon');
+      showToast('Coupon removed.', 'info');
+      renderCart();
+    };
+
+    window.handleProceedCheckout = function() {
+      // Store checkout coupon state
+      if (appliedCoupon) {
+        sessionStorage.setItem('pagewise_applied_coupon', JSON.stringify(appliedCoupon));
+        sessionStorage.setItem('vook_applied_coupon', JSON.stringify(appliedCoupon));
+      } else {
+        sessionStorage.removeItem('pagewise_applied_coupon');
+        sessionStorage.removeItem('vook_applied_coupon');
+      }
+      sessionStorage.removeItem('vook_coins_redeem');
+      window.location.href = 'checkout.html';
+    };
+  </script>
+</body>
+</html>

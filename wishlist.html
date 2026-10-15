@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My Wishlist — PAGEWISE | Premium Online Bookstore</title>
+  <meta name="description" content="View your saved books, curated for future reading and gifting. Move items directly to your shopping bag.">
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect rx='18' width='100' height='100' fill='%231A2332'/><text x='50' y='68' text-anchor='middle' font-size='52' font-family='serif' font-weight='bold' fill='%23D4A843'>P</text></svg>">
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:wght@600;700;800&display=swap" rel="stylesheet">
+  <!-- Bootstrap 5 -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" rel="stylesheet">
+  <!-- VOOK -->
+  <link href="css/style.css" rel="stylesheet">
+</head>
+<body>
+
+  <!-- ═══ Announcement Bar ═══ -->
+  <div class="announcement-bar" id="announcement-bar">
+    <span>📚 <strong>Autumn Book Festival</strong> — Use code <a href="shop.html">WELCOME10</a> for 10% off your first order!</span>
+    <button class="announcement-close" aria-label="Dismiss announcement"><i class="bi bi-x-lg"></i></button>
+  </div>
+
+  <!-- ═══ Navbar ═══ -->
+  <nav class="navbar navbar-expand-lg vook-navbar" id="main-navbar">
+    <div class="container">
+      <a class="navbar-brand vook-logo" href="index.html">
+        <span class="logo-icon"><i class="bi bi-book-half"></i></span>
+        PAGEWISE
+      </a>
+
+      <div class="d-flex align-items-center gap-2 d-lg-none">
+        <button class="nav-icon-btn dark-mode-toggle" aria-label="Toggle dark mode"><i class="bi bi-moon-fill"></i></button>
+        <a href="wishlist.html" class="nav-icon-link active" aria-label="Wishlist">
+          <i class="bi bi-heart"></i>
+          <span class="wishlist-badge" style="display:none">0</span>
+        </a>
+        <a href="cart.html" class="nav-icon-link" aria-label="Cart">
+          <i class="bi bi-bag"></i>
+          <span class="cart-badge" style="display:none">0</span>
+        </a>
+        <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+      </div>
+
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="shop.html">Explore Books</a></li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown">Categories</a>
+            <ul class="dropdown-menu" id="nav-categories-dropdown"></ul>
+          </li>
+          <li class="nav-item"><a class="nav-link" href="shop.html?sort=bestseller">Bestsellers</a></li>
+          <li class="nav-item"><a class="nav-link" href="shop.html?sort=newest">New Arrivals</a></li>
+        </ul>
+
+        <div class="vook-search-wrap d-none d-lg-block me-3">
+          <i class="bi bi-search vook-search-icon"></i>
+          <input type="search" class="vook-search-input" placeholder="Search books, authors…" aria-label="Search books">
+        </div>
+
+        <div class="d-none d-lg-flex align-items-center gap-1">
+          <button class="nav-icon-btn dark-mode-toggle" aria-label="Toggle dark mode"><i class="bi bi-moon-fill"></i></button>
+          <a href="wishlist.html" class="nav-icon-link active" aria-label="Wishlist">
+            <i class="bi bi-heart"></i>
+            <span class="wishlist-badge" style="display:none">0</span>
+          </a>
+          <a href="cart.html" class="nav-icon-link" aria-label="Cart">
+            <i class="bi bi-bag"></i>
+            <span class="cart-badge" style="display:none">0</span>
+          </a>
+          <a href="profile.html" class="nav-icon-link" aria-label="Account">
+            <i class="bi bi-person"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Breadcrumbs -->
+  <section class="py-3 border-bottom" style="background:var(--vook-cream-light)">
+    <div class="container">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb vook-breadcrumb mb-0">
+          <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+          <li class="breadcrumb-item active" aria-current="page">My Wishlist</li>
+        </ol>
+      </nav>
+    </div>
+  </section>
+
+  <!-- ═══ Wishlist Main Section ═══ -->
+  <main class="section-padding py-5">
+    <div class="container">
+      <div class="d-flex flex-wrap justify-content-between align-items-center mb-4 gap-2">
+        <div>
+          <h1 class="h2 fw-heading mb-1">My Wishlist</h1>
+          <p class="text-muted mb-0" id="wishlist-count-label">Books you’re saving for later</p>
+        </div>
+        <div id="wishlist-actions" style="display:none">
+          <button class="btn btn-vook btn-sm px-3 me-2" onclick="handleMoveAllToCart()">
+            <i class="bi bi-bag-plus me-1"></i> Add All to Bag
+          </button>
+          <button class="btn btn-outline-danger btn-sm" onclick="handleClearWishlist()">
+            <i class="bi bi-trash3 me-1"></i> Clear Wishlist
+          </button>
+        </div>
+      </div>
+
+      <!-- Wishlist Grid -->
+      <div id="wishlist-container">
+        <!-- Rendered by JS -->
+      </div>
+    </div>
+  </main>
+
+  <!-- ═══ Footer ═══ -->
+  <footer class="vook-footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-3 col-md-6">
+          <a class="vook-logo mb-3 d-inline-flex" href="index.html" style="color:var(--vook-cream)!important">
+            <span class="logo-icon"><i class="bi bi-book-half"></i></span> PAGEWISE
+          </a>
+          <p style="font-size:0.88rem;margin-top:0.75rem">Find Your Next Chapter. A curated bookstore for thoughtful readers.</p>
+          <div class="footer-social mt-3">
+            <a href="#" aria-label="Twitter"><i class="bi bi-twitter-x"></i></a>
+            <a href="#" aria-label="Instagram"><i class="bi bi-instagram"></i></a>
+            <a href="#" aria-label="Facebook"><i class="bi bi-facebook"></i></a>
+            <a href="#" aria-label="YouTube"><i class="bi bi-youtube"></i></a>
+          </div>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6>Shop</h6>
+          <ul class="footer-links">
+            <li><a href="shop.html">All Books</a></li>
+            <li><a href="shop.html?sort=bestseller">Bestsellers</a></li>
+            <li><a href="shop.html?sort=newest">New Arrivals</a></li>
+            <li><a href="shop.html?filter=under299">Under ₹299</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6>Account</h6>
+          <ul class="footer-links">
+            <li><a href="profile.html">My Profile</a></li>
+            <li><a href="orders.html">Orders</a></li>
+            <li><a href="wishlist.html">Wishlist</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-2 col-md-6 col-6">
+          <h6>Support</h6>
+          <ul class="footer-links">
+            <li><a href="#">Help Centre</a></li>
+            <li><a href="#">Shipping Info</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Contact Us</a></li>
+          </ul>
+        </div>
+        <div class="col-lg-3 col-md-6 col-6">
+          <h6>Legal</h6>
+          <ul class="footer-links">
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Service</a></li>
+            <li><a href="#">Cookie Policy</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom text-center">
+        <p class="mb-0">&copy; 2026 PAGEWISE. All rights reserved. This is a frontend prototype for demonstration purposes.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ═══ Mobile Bottom Navigation ═══ -->
+  <nav class="mobile-bottom-nav" id="mobile-bottom-nav">
+    <a href="index.html" class="mobile-nav-item" aria-label="Home">
+      <i class="bi bi-house"></i> <span>Home</span>
+    </a>
+    <a href="shop.html" class="mobile-nav-item" aria-label="Explore">
+      <i class="bi bi-compass"></i> <span>Explore</span>
+    </a>
+    <a href="wishlist.html" class="mobile-nav-item active" aria-label="Wishlist">
+      <i class="bi bi-heart"></i> <span>Wishlist</span>
+      <span class="wishlist-badge" style="display:none;position:absolute;top:2px;right:calc(50% - 18px)">0</span>
+    </a>
+    <a href="cart.html" class="mobile-nav-item" aria-label="Cart">
+      <i class="bi bi-bag"></i> <span>Cart</span>
+      <span class="cart-badge" style="display:none;position:absolute;top:2px;right:calc(50% - 18px)">0</span>
+    </a>
+    <a href="profile.html" class="mobile-nav-item" aria-label="Profile">
+      <i class="bi bi-person"></i> <span>Profile</span>
+    </a>
+  </nav>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="js/data.js"></script>
+  <script src="js/app.js"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // Navbar categories
+      const catDropdown = document.getElementById('nav-categories-dropdown');
+      if (catDropdown) {
+        CATEGORIES.forEach(cat => {
+          const li = document.createElement('li');
+          li.innerHTML = `<a class="dropdown-item" href="shop.html?category=${cat.id}"><i class="bi ${cat.icon} me-2"></i>${cat.name}</a>`;
+          catDropdown.appendChild(li);
+        });
+      }
+
+      renderWishlist();
+      window.addEventListener('wishlistUpdated', () => renderWishlist());
+    });
+
+    function renderWishlist() {
+      const wishlist = getWishlist();
+      const container = document.getElementById('wishlist-container');
+      const countLabel = document.getElementById('wishlist-count-label');
+      const actions = document.getElementById('wishlist-actions');
+
+      if (!wishlist || wishlist.length === 0) {
+        if (countLabel) countLabel.textContent = '0 items in your wishlist';
+        if (actions) actions.style.display = 'none';
+
+        container.innerHTML = `
+          <div class="empty-state text-center py-5">
+            <div class="empty-state-icon fs-1 text-muted mb-3"><i class="bi bi-heart"></i></div>
+            <h3 class="fw-heading">Your Wishlist is Empty</h3>
+            <p class="text-muted mb-4">Save books you want to read or revisit later.</p>
+            <a href="shop.html" class="btn btn-vook btn-lg px-4"><i class="bi bi-compass me-2"></i> Discover Great Books</a>
+          </div>
+        `;
+        return;
+      }
+
+      const totalItems = wishlist.length;
+      if (countLabel) countLabel.textContent = `${totalItems} saved book${totalItems > 1 ? 's' : ''}`;
+      if (actions) actions.style.display = 'block';
+
+      const books = wishlist.map(id => getBookById(id)).filter(Boolean);
+
+      container.innerHTML = `
+        <div class="row row-cols-2 row-cols-md-3 row-cols-lg-4 g-4">
+          ${books.map(book => {
+            const stock = getStock(book.id);
+            const isOutOfStock = stock <= 0;
+            const discount = Math.round(((book.originalPrice - book.sellingPrice) / book.originalPrice) * 100);
+
+            return `
+              <div class="col">
+                <div class="card h-100 border-0 shadow-sm p-3 position-relative">
+                  <button class="btn btn-light btn-sm position-absolute top-0 end-0 m-2 rounded-circle" 
+                          onclick="handleRemoveWishlistItem('${book.id}')" 
+                          title="Remove from wishlist" style="width:32px; height:32px; padding:0;">
+                    <i class="bi bi-x-lg"></i>
+                  </button>
+
+                  <a href="book-details.html?id=${book.id}" class="text-center d-block mb-3">
+                    <img src="${book.cover}" alt="${book.title}" class="rounded shadow-sm" 
+                         style="height: 200px; width: auto; max-width: 100%; object-fit: cover;"
+                         onerror="this.src='https://placehold.co/150x220/1a2332/f5f0e8?text=PAGEWISE'">
+                  </a>
+
+                  <div class="card-body p-0 d-flex flex-column">
+                    <span class="badge text-bg-light border text-uppercase mb-1 align-self-start" style="font-size:0.65rem">${book.category}</span>
+                    <h6 class="card-title fw-heading mb-1 text-truncate">
+                      <a href="book-details.html?id=${book.id}" class="text-decoration-none text-dark">${book.title}</a>
+                    </h6>
+                    <small class="text-muted mb-2">${book.author}</small>
+
+                    <div class="d-flex align-items-center gap-1 mb-2 small">
+                      <span class="text-warning">${renderStars(book.rating)}</span>
+                      <span class="text-muted">(${book.rating.toFixed(1)})</span>
+                    </div>
+
+                    <div class="d-flex align-items-baseline gap-2 mb-3">
+                      <span class="fw-bold text-accent">₹${book.sellingPrice}</span>
+                      ${discount > 0 ? `<span class="text-decoration-line-through text-muted small">₹${book.originalPrice}</span>` : ''}
+                    </div>
+
+                    <div class="mt-auto">
+                      <button class="btn btn-vook btn-sm w-100 mb-2" onclick="handleMoveToCart('${book.id}')" ${isOutOfStock ? 'disabled' : ''}>
+                        <i class="bi bi-bag-plus me-1"></i> ${isOutOfStock ? 'Out of Stock' : 'Move to Bag'}
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            `;
+          }).join('')}
+        </div>
+      `;
+    }
+
+    window.handleRemoveWishlistItem = function(bookId) {
+      toggleWishlist(bookId);
+      renderWishlist();
+    };
+
+    window.handleMoveToCart = function(bookId) {
+      addToCart(bookId, 1);
+      toggleWishlist(bookId);
+      renderWishlist();
+    };
+
+    window.handleMoveAllToCart = function() {
+      const wishlist = getWishlist();
+      let movedCount = 0;
+      wishlist.forEach(id => {
+        if (getStock(id) > 0) {
+          addToCart(id, 1);
+          movedCount++;
+        }
+      });
+      saveWishlist([]);
+      showToast(`Moved ${movedCount} books to your shopping bag!`, 'success');
+      renderWishlist();
+    };
+
+    window.handleClearWishlist = function() {
+      if (confirm('Are you sure you want to clear your entire wishlist?')) {
+        saveWishlist([]);
+        showToast('Wishlist cleared.', 'info');
+        renderWishlist();
+      }
+    };
+  </script>
+</body>
+</html>
